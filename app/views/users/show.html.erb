@@ -1,11 +1,12 @@
-<h2 align="left "><%= @user.name %></h2>
-<p>
-  Email: <%= @user.email %>
-</p>
-<% if @user == current_user %>
-  <%= link_to 'Edit Profile', edit_user_registration_path, class: "btn btn-xs btn-primary" %>
-  <%= render 'posts/form' %>
-<% end %>
+<div class="container">
+  <h2 align="left "><%= @user.name %></h2>
+  <p>Email: <%= @user.email %></p>
+  <% if @user == current_user %>
+    <p><%= link_to 'Edit Profile', edit_user_registration_path, class: "btn btn-xs btn-primary" %></p>
+    <%= render 'posts/form' %>
+  <% end %>
+</div>
 
-
-<%= render @user.posts if @user.posts.any? %>
+<div class="container ">
+  <%= render @user.posts if @user.posts.any? %>
+</div>

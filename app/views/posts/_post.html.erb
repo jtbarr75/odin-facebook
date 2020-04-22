@@ -1,5 +1,5 @@
-<% if post.body %>
-<div class="well col-xs-8 col-xs-offset-2">
+<% if post.valid? %>
+<div class="well col-xs-8">
   <p><%= post.body %></p>
   Posted: <%= post.created_at.strftime("%b %e, %Y") %>
   <% if current_user == post.user %>
