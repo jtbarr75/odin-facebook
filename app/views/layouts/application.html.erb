@@ -14,9 +14,7 @@
     <header>
       <%= render 'layouts/navigation' %>
     </header>
-      <% flash.each do |type, message| %>
-        <%= content_tag :div, message, id: "flash_#{type}"%>
-      <% end %>
+    <%= render 'shared/messages'%>
     <%= yield %>
   </body>
 </html>
