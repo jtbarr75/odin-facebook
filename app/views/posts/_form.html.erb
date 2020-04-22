@@ -1,0 +1,17 @@
+<p>Create a new post</p>
+
+<%= form_for [@user, @post] do |f| %>
+  <% if @post.errors.any? %>
+    <ul class='errors'>
+    <%= @post.errors.full_messages.each do |error| %>
+      <%= content_tag :div, error, class: error %>
+    <% end %>
+    </ul>
+  <% end %>
+  <div class='field'>
+    <%= f.label :body %>
+    <%= f.text_area :body %>
+  </div>
+
+  <%= f.submit %>
+<% end %>

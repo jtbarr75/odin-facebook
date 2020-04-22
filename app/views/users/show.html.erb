@@ -4,4 +4,8 @@
 </p>
 <% if @user == current_user %>
   <%= link_to 'Edit Profile', edit_user_registration_path%>
+  <%= render 'posts/form' %>
 <% end %>
+
+
+<%= render @user.posts if @user.posts.any? %>
