@@ -1,6 +1,9 @@
 <% if post.body %>
-<div class="post">
+<div class="well col-xs-8 col-xs-offset-2">
   <p><%= post.body %></p>
-  <p>Posted: <%= post.created_at %></p>
+  Posted: <%= post.created_at.strftime("%b %e, %Y") %>
+  <% if current_user == post.user %>
+    <%= link_to "Delete", user_post_path(current_user, post), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-default btn-xs" %>
+  <% end %>
 </div>
 <% end %>
