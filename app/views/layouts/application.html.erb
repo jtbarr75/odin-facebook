@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>OdinFacebook</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= content_for?(:title) ? yield(:title) : "OdinFacebook" %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,19 +11,12 @@
   </head>
 
   <body>
-    <div class='navbar'>
-      <%= link_to 'Home', root_path %>
-      <% if user_signed_in? %>
-        Signed in as <%= current_user.name %>
-        <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
-      <% else %>
-        <%= link_to "Sign Up", new_user_registration_path %> or 
-        <%= link_to "Sign In", new_user_session_path %>
+    <header>
+      <%= render 'layouts/navigation' %>
+    </header>
+      <% flash.each do |type, message| %>
+        <%= content_tag :div, message, id: "flash_#{type}"%>
       <% end %>
-    </div>
-    <% flash.each do |type, message| %>
-      <%= content_tag :div, message, id: "flash_#{type}"%>
-    <% end %>
     <%= yield %>
   </body>
 </html>
