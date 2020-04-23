@@ -7,9 +7,7 @@
 jason: 
   name: Jason Barr
   email: jason@example.com
-  password: password
 
 user2: 
   name: User Two
   email: user2@example.com
-  password: password
