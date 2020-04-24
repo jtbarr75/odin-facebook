@@ -4,6 +4,14 @@
   <% if @user == current_user %>
     <p><%= link_to 'Edit Profile', edit_user_registration_path, class: "btn btn-xs btn-primary" %></p>
     <%= render 'posts/form' %>
+  <% else %>
+    <% if current_user.friends_with(@user) %>
+      <p><span class="label label-success">Friends!</span><p>
+    <% elsif %>
+      <p><span class="label label-primary">Request Sent</span></p>
+    <% else %>
+      <%= link_to 'Send Friend Request', user_friendships_path(@user), method: :post, class: "btn btn-xs btn-primary" %>
+    <% end %>
   <% end %>
 </div>
 
