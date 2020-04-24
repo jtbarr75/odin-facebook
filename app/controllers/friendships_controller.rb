@@ -12,6 +12,15 @@ class FriendshipsController < ApplicationController
   end
 
   def update
+    @friendship = Friendship.find_by(user_id: current_user.id, friend_id: params[:user_id])
+    @friendship.status = 'active'
+    if @friendship.save
+      flash[:success] = "Friend Request accepted!"
+      redirect_back(fallback_location: root_path)
+    else
+      flash[:danger] = "Something unexpected prevented you from accepting this request."
+      redirect_back(fallback_location: root_path)
+    end
   end
 
   def destroy

@@ -17,4 +17,8 @@ class User < ApplicationRecord
   def request_sent_to(user)
     self.friends.exists?(user.id) && self.friendships.find_by(friend_id: user.id).status == 'pending'
   end
+
+  def friend_requests
+    self.friendships.where(status: 'pending')
+  end
 end
