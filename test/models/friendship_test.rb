@@ -7,22 +7,25 @@ class FriendshipTest < ActiveSupport::TestCase
     @friend = users(:user2)
   end
 
-  test "should create inverse friendship" do
-    @user.friends << @friend
+  test "should create friendship" do
+    @user.friendships.create(friend_id: @friend.id, status: 'pending')
     assert @user.friends.exists?(@friend.id)
-    assert @friend.friends.exists?(@user.id)
   end
 
   test "shouldn't create duplicate friendships" do
-    @user.friends << @friend
+    @user.friendships.create(friend_id: @friend.id, status: 'pending')
     @user.reload
     assert_no_difference 'Friendship.count' do
-      Friendship.create(user_id: @user.id, friend_id: @friend.id, status: 'pending')
+      @user.friendships.create(friend_id: @friend.id, status: 'pending')
     end
   end
 
-  test "initial status should be pending" do
-    @user.friends << @friend
-    assert @user.friendships.first.status == 'pending'
+  test "status accepts only active and pending" do
+    friendship = @user.friendships.new(friend_id: @friend.id, status: 'active')
+    assert friendship.valid?
+    friendship.status = 'pending'
+    assert friendship.valid?
+    friendship.status = 'other'
+    assert_not friendship.valid?
   end
 end

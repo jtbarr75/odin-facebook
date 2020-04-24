@@ -10,14 +10,17 @@ class User < ApplicationRecord
   has_many :friendships, foreign_key: :user_id, class_name: 'Friendship'
   has_many :friends, through: :friendships
 
+  #returns true if friendship is active with given user
   def friends_with(user)
     self.friends.exists?(user.id) && self.friendships.find_by(friend_id: user.id).status == 'active'
   end
 
-  def request_sent_to(user)
+  #returns true if friendship is pending with given user
+  def requested_by(user)
     self.friends.exists?(user.id) && self.friendships.find_by(friend_id: user.id).status == 'pending'
   end
 
+  #returns pending friendships
   def friend_requests
     self.friendships.where(status: 'pending')
   end

@@ -7,10 +7,10 @@
   <% else %>
     <% if current_user.friends_with(@user) %>
       <p><span class="label label-success">Friends!</span><p>
-    <% elsif %>
+    <% elsif @user.requested_by(current_user) %>
       <p><span class="label label-primary">Request Sent</span></p>
     <% else %>
-      <%= link_to 'Send Friend Request', user_friendships_path(@user), method: :post, class: "btn btn-xs btn-primary" %>
+      <p><%= link_to 'Send Friend Request', user_friendships_path(@user), method: :post, class: "btn btn-xs btn-primary" %></p>
     <% end %>
   <% end %>
 </div>

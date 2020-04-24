@@ -1,7 +1,12 @@
 class FriendshipsController < ApplicationController
 
+  def index
+    @user = User.find(params[:user_id])
+    @friend_requests = @user.friend_requests
+  end
+
   def create
-    @friendship = Friendship.new(user_id: current_user.id, friend_id: params[:user_id], status: 'pending')
+    @friendship = Friendship.new(user_id: params[:user_id], friend_id: current_user.id, status: 'pending')
     if @friendship.save
       flash[:success] = "Friend Request sent!"
       redirect_back(fallback_location: root_path)
@@ -12,8 +17,8 @@ class FriendshipsController < ApplicationController
   end
 
   def update
-    @friendship = Friendship.find_by(user_id: current_user.id, friend_id: params[:user_id])
-    @friendship.status = 'active'
+    @friendship = Friendship.find(params[:id])
+    @friendship.status = params[:status]
     if @friendship.save
       flash[:success] = "Friend Request accepted!"
       redirect_back(fallback_location: root_path)
