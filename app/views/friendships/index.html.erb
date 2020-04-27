@@ -1,7 +1,11 @@
 <div class="container">
   <div class="list-group">
   <% @friend_requests.each do |request| %>
-    <li class="list-group-item"><%= request.friend.name %> wants to be friends! <%= link_to "Accept", user_friendship_path(@user, request, status: 'active'), method: :patch, class: "btn btn-xs btn-primary" %></li>
+    <li class="list-group-item">
+      <%= request.friend.name %> wants to be friends! 
+      <%= link_to "Accept", user_friendship_path(@user, request, status: 'active'), method: :patch, class: "btn btn-xs btn-primary" %>
+      <%= link_to "Decline", user_friendship_path(@user, request), method: :delete, class: "btn btn-xs btn-danger", data: { confirm: "Are you sure?" } %>
+    </li>
   <% end %>
   </div>
 </div>
