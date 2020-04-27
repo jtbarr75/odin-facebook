@@ -9,7 +9,7 @@
         <li class="list-group-item">
           <%= request.friend.name %> wants to be friends! 
           <%= link_to "Accept", user_friendship_path(@user, request, status: 'active'), method: :patch, class: "btn btn-xs btn-primary" %>
-          <%= link_to "Decline", user_friendship_path(@user, request), method: :delete, class: "btn btn-xs btn-danger", data: { confirm: "Are you sure?" } %>
+          <%= link_to "Decline", user_friendship_path(@user, request, message: 'Request deleted'), method: :delete, class: "btn btn-xs btn-danger", data: { confirm: "Are you sure?" } %>
         </li>
       <% end %>
       </div>
@@ -17,10 +17,14 @@
     <% end %>
   <% end %>
   <h2>Friends</h2>
+  <% if @friendships.empty? %>
+    <div><%= link_to "No friends yet, why don't you find some here", users_path %></div>
+  <% end %>
   <div class="list-group">
-    <% @friends.each do |friend| %>
+    <% @friendships.each do |friendship| %>
       <li class="list-group-item">
-        <%= link_to friend.name, user_path(friend) %>
+        <%= link_to friendship.friend.name, user_path(friendship.friend) %>
+        <%= link_to "Unfriend", user_friendship_path(@user, friendship, message: "Unfriended #{friendship.friend.name}"), method: :delete, class: "btn btn-xs btn-danger", data: { confirm: "Are you sure?" } %>
       </li>
     <% end %>
   </div>

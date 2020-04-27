@@ -19,7 +19,7 @@ class FriendRequestTest < ActionDispatch::IntegrationTest
     get user_path(@friend)
     assert_select "span.label", "Request Sent"
     assert_not flash.empty?
-    assert_select "a[href=?]", user_friendships_path(@friend), count: 0
+    assert_select "a[href=?]", user_friendships_path(@friend), count: 1
     sign_out @user
     #other user should get notification
     sign_in @friend

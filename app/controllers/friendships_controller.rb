@@ -4,7 +4,7 @@ class FriendshipsController < ApplicationController
   def index
     @user = User.find(params[:user_id])
     @friend_requests = @user.friend_requests.includes(:friend)
-    @friends = @user.active_friends
+    @friendships = @user.active_friendships.includes(:friend)
   end
 
   def create
@@ -33,7 +33,7 @@ class FriendshipsController < ApplicationController
   def destroy
     @friendship = Friendship.find(params[:id])
     @friendship.destroy
-    flash[:success] = "Request deleted."
+    flash[:success] = params[:message]
     redirect_back(fallback_location: root_path)
   end
 end
