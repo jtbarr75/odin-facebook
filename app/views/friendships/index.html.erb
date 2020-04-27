@@ -24,7 +24,9 @@
     <% @friendships.each do |friendship| %>
       <li class="list-group-item">
         <%= link_to friendship.friend.name, user_path(friendship.friend) %>
-        <%= link_to "Unfriend", user_friendship_path(@user, friendship, message: "Unfriended #{friendship.friend.name}"), method: :delete, class: "btn btn-xs btn-danger", data: { confirm: "Are you sure?" } %>
+        <% if current_user == @user %>
+          <%= link_to "Unfriend", user_friendship_path(@user, friendship, message: "Unfriended #{friendship.friend.name}"), method: :delete, class: "btn btn-xs btn-danger", data: { confirm: "Are you sure?" } %>
+        <% end %>
       </li>
     <% end %>
   </div>

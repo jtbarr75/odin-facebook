@@ -29,6 +29,8 @@
           <ul class="dropdown-menu">
             <% if current_user.friend_requests.any? %>
               <li><%= link_to  "You recieved #{ pluralize(current_user.friend_requests.count, "Friend Request") }", user_friendships_path(current_user) %></li>
+            <% else %>
+              <li> Nothing new... <li>
             <% end %>
           </ul>
         </li>
