@@ -29,5 +29,9 @@ class FriendshipsController < ApplicationController
   end
 
   def destroy
+    @friendship = Friendship.find(params[:id])
+    @friendship.destroy
+    flash[:success] = "Request deleted."
+    redirect_back(fallback_location: root_path)
   end
 end
