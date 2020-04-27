@@ -1,18 +1,22 @@
 <div class="container">
-  <% unless @friend_requests.empty? %>
-  <h2>Friend Requests!</h2>
-    <div class="list-group">
-    <% @friend_requests.each do |request| %>
-      <li class="list-group-item">
-        <%= request.friend.name %> wants to be friends! 
-        <%= link_to "Accept", user_friendship_path(@user, request, status: 'active'), method: :patch, class: "btn btn-xs btn-primary" %>
-        <%= link_to "Decline", user_friendship_path(@user, request), method: :delete, class: "btn btn-xs btn-danger", data: { confirm: "Are you sure?" } %>
-      </li>
+  <% if current_user == @user %>
+    <h2>Friend Requests</h2>
+    <% if @friend_requests.empty? %>
+      <p>No Requests</p>
+    <% else %>
+      <div class="list-group">
+      <% @friend_requests.each do |request| %>
+        <li class="list-group-item">
+          <%= request.friend.name %> wants to be friends! 
+          <%= link_to "Accept", user_friendship_path(@user, request, status: 'active'), method: :patch, class: "btn btn-xs btn-primary" %>
+          <%= link_to "Decline", user_friendship_path(@user, request), method: :delete, class: "btn btn-xs btn-danger", data: { confirm: "Are you sure?" } %>
+        </li>
+      <% end %>
+      </div>
+      <hr class='solid'>
     <% end %>
-    </div>
-    <hr class='solid'>
   <% end %>
-  <h2>Friends!</h2>
+  <h2>Friends</h2>
   <div class="list-group">
     <% @friends.each do |friend| %>
       <li class="list-group-item">

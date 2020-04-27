@@ -25,12 +25,18 @@ class User < ApplicationRecord
     self.friendships.where(status: 'pending')
   end
 
-  #returns active friendships
+  #returns collection of active friends
   def active_friends
-    self.class.where(id: (self.friendships.where(status: 'active').select('friend_id') ) )
+    self.class.where(id: (self.active_friendships.select('friend_id') ) )
   end
 
+  #returns active friendships
   def active_friendships
     self.friendships.where(status: 'active')
+  end
+
+  #returns number of active friends
+  def friends_count
+    self.active_friendships.count
   end
 end
