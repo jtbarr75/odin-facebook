@@ -24,4 +24,13 @@ class User < ApplicationRecord
   def friend_requests
     self.friendships.where(status: 'pending')
   end
+
+  #returns active friendships
+  def active_friends
+    self.class.where(id: (self.friendships.where(status: 'active').select('friend_id') ) )
+  end
+
+  def active_friendships
+    self.friendships.where(status: 'active')
+  end
 end
