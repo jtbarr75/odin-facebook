@@ -3,7 +3,7 @@
     <p><%= comment.body %></p>
     <%= comment.user.name %> commented at: <%= comment.created_at.strftime("%b %e, %Y") %>
     <% if current_user == comment.user || comment.user == comment.post.user %>
-      <%= link_to "Delete", post_comment_path(comment.post, comment), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-default btn-xs" %>
+      <%= link_to "Delete", comment_path(comment), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-default btn-xs" %>
     <% end %>
   </div>
 </div>
