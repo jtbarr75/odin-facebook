@@ -1,6 +1,6 @@
 class Post < ApplicationRecord
   include Likable
-  
+
   belongs_to :user
   has_many :comments, dependent: :destroy
 
