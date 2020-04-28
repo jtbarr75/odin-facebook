@@ -1,9 +1,11 @@
 <% if post.valid? %>
-<div class="well col-xs-8">
-  <p><%= post.body %></p>
-  Posted: <%= post.created_at.strftime("%b %e, %Y") %>
-  <% if current_user == post.user %>
-    <%= link_to "Delete", user_post_path(current_user, post), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-default btn-xs" %>
+  <%= link_to user_post_path(post.user, post) do %>
+    <div class="well col-xs-8">
+      <p><%= post.body %></p>
+      Posted: <%= post.created_at.strftime("%b %e, %Y") %>
+      <% if current_user == post.user %>
+        <%= link_to "Delete", user_post_path(current_user, post), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-default btn-xs" %>
+      <% end %>
+    </div>
   <% end %>
-</div>
 <% end %>
