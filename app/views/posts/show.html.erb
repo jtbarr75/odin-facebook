@@ -1,2 +1,10 @@
-<h1>Post</h1>
-<p><%= @post.body %></p>
+<div class="row">
+  <div class="well col-xs-8">
+    <p><%= @post.body %></p>
+    <i>Posted: <%= @post.created_at.strftime("%b %e, %Y") %></i>
+  </div>
+</div>
+<%= render 'comments/form'%>
+<% if @post.comments.any? %>
+  <%= render @post.comments %>
+<% end %>
