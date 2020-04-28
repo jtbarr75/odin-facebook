@@ -1,6 +1,12 @@
 class PostsController < ApplicationController
   before_action :require_login
 
+  def index
+  end
+
+  def show
+  end
+
   def create
     @user = User.find(params[:user_id])
     @post = @user.posts.build(params.require(:post).permit(:body))
