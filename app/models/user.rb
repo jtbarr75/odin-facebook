@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :friendships, foreign_key: :user_id, class_name: 'Friendship'
   has_many :friends, through: :friendships
+  has_many :likes
 
   #returns true if friendship is active with given user
   def friends_with(user)

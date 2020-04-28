@@ -1,4 +1,6 @@
 class Comment < ApplicationRecord
+  include Likable
+  
   belongs_to :user
   belongs_to :post
 
