@@ -17,4 +17,5 @@ Rails.application.routes.draw do
 
   resources :likes, only: [:show]
   resources :friendships, only: [:show]
+  resources :notifications, only: [:update]
 end

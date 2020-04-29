@@ -25,11 +25,17 @@
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %> 
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Notifications <span class="badge"><%= current_user.notifications.count %></span> <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Notifications <span class="badge"><%= current_user.notifications.unread.count %></span> <span class="caret"></span></a>
           <ul class="dropdown-menu scrollable-menu" role="menu">
             <% if current_user.notifications.any? %>
               <% current_user.notifications.desc.each do |notification| %>
-                <li><%= link_to notification.message, polymorphic_path(notification.notifiable) %></li>
+                <% if notification.unread %>
+                  <li class="bg-light-grey">
+                <% else %>
+                  <li>
+                <% end %>
+                  <%= link_to notification.message, notification, method: :patch %>
+                </li>
               <% end %>
             <% else %>
               <li> Nothing new... <li>
