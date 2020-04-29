@@ -23,6 +23,7 @@ class FriendshipsController < ApplicationController
     @friendship = Friendship.find(params[:id])
     @friendship.status = params[:status]
     if @friendship.save
+      @friendship.notify(@friendship.friend, "#{current_user.name} accepted your friend request")
       flash[:success] = "Friend Request accepted!"
       redirect_back(fallback_location: root_path)
     else
@@ -39,7 +40,6 @@ class FriendshipsController < ApplicationController
   end
 
   def show
-    @friendship = Friendship.find(params[:id])
-    redirect_to user_friendships_path(@friendship.user)
+    redirect_to user_friendships_path(current_user)
   end
 end
