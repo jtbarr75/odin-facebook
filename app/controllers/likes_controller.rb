@@ -5,6 +5,7 @@ class LikesController < ApplicationController
     @parent ||= Comment.find(params[:comment_id]) if params[:comment_id]
     @like = @parent.likes.build(user_id: current_user.id)
     if @like.save
+      @like.notify(@parent.user, "#{current_user.name} liked your #{@parent.class.name.downcase}")
       redirect_back(fallback_location: root_path)
     else
       flash[:danger] = "Could not like the post"
@@ -16,5 +17,10 @@ class LikesController < ApplicationController
     @like = Like.find(params[:id])
     @like.destroy
     redirect_back(fallback_location: root_path)
+  end
+
+  def show
+    @like = Like.find(params[:id])
+    redirect_to @like.likable
   end
 end

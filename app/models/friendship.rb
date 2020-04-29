@@ -6,7 +6,6 @@ class Friendship < ApplicationRecord
 
   after_update :create_inverse
   after_destroy :destroy_inverse
-  after_create :notify
 
   validates_uniqueness_of :user_id, scope: :friend_id
   validates :status, presence: true, inclusion: { in: %w(active pending) }

@@ -10,6 +10,7 @@ class FriendshipsController < ApplicationController
   def create
     @friendship = Friendship.new(user_id: params[:user_id], friend_id: current_user.id, status: 'pending')
     if @friendship.save
+      @friendship.notify(@friendship.user, "#{current_user.name} sent you a friend request")
       flash[:success] = "Friend Request sent!"
       redirect_back(fallback_location: root_path)
     else
@@ -35,5 +36,10 @@ class FriendshipsController < ApplicationController
     @friendship.destroy
     flash[:success] = params[:message]
     redirect_back(fallback_location: root_path)
+  end
+
+  def show
+    @friendship = Friendship.find(params[:id])
+    redirect_to user_friendships_path(@friendship.user)
   end
 end
