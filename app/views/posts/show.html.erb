@@ -12,5 +12,5 @@
 </div>
 <%= render 'comments/form'%>
 <% if @post.comments.any? %>
-  <%= render @post.comments %>
+  <%= render @post.comments.desc %>
 <% end %>

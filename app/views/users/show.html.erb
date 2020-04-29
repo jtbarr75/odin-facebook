@@ -17,5 +17,5 @@
 </div>
 
 <div class="container ">
-  <%= render @user.posts if @user.posts.any? %>
+  <%= render @user.posts.desc if @user.posts.any? %>
 </div>
