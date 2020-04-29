@@ -4,5 +4,5 @@ class Notification < ApplicationRecord
 
   validates :message, presence: true
 
-
+  scope :desc, -> { order("created_at DESC") }
 end
