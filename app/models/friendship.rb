@@ -1,11 +1,12 @@
 class Friendship < ApplicationRecord
   include Notifiable
-  
+
   belongs_to :user, foreign_key: :user_id, class_name: 'User'
   belongs_to :friend, foreign_key: :friend_id, class_name: 'User'
 
   after_update :create_inverse
   after_destroy :destroy_inverse
+  after_create :notify
 
   validates_uniqueness_of :user_id, scope: :friend_id
   validates :status, presence: true, inclusion: { in: %w(active pending) }
