@@ -2,6 +2,7 @@ class PostsController < ApplicationController
   before_action :require_login
 
   def index
+    @posts = current_user.timeline_posts
   end
 
   def show

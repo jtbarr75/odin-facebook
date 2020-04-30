@@ -42,4 +42,12 @@ class User < ApplicationRecord
   def friends_count
     self.active_friendships.count
   end
+
+  #returns timeline of posts from self and all friends
+  def timeline_posts
+    Post.joins(:user)
+      .where( users: { id: self.active_friends.select(:id) })
+      .or(Post.joins(:user).where(users: { id: self.id }))
+      .desc
+  end
 end
