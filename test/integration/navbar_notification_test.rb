@@ -28,8 +28,8 @@ class NavbarNotificationsTest < ActionDispatch::IntegrationTest
       assert_select "a", "Notifications 3"
     end
     assert_select "a[href=?]", notification_path(Notification.first), "Jason Barr sent you a friend request"
-    assert_select "a[href=?]", notification_path(Notification.find(2)), "Jason Barr liked your post"
-    assert_select "a[href=?]", notification_path(Notification.find(3)), "Jason Barr commented on your post"
+    assert_select "a#notification-2", "Jason Barr liked your post"
+    assert_select "a#notification-1", "Jason Barr commented on your post"
     #does not notify when commenting on or liking own post
     assert_no_difference 'Notification.count' do
       post post_likes_path(@post)

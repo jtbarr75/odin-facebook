@@ -28,13 +28,13 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Notifications <span class="badge"><%= current_user.notifications.unread.count %></span> <span class="caret"></span></a>
           <ul class="dropdown-menu scrollable-menu" role="menu">
             <% if current_user.notifications.any? %>
-              <% current_user.notifications.desc.each do |notification| %>
+              <% current_user.notifications.desc.each_with_index do |notification, index| %>
                 <% if notification.unread %>
                   <li class="bg-light-grey">
                 <% else %>
                   <li>
                 <% end %>
-                  <%= link_to notification.message, notification, method: :patch %>
+                  <%= link_to notification.message, notification, method: :patch, id: "notification-#{index+1}" %>
                 </li>
               <% end %>
             <% else %>
