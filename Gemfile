@@ -41,8 +41,8 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'devise'
-gem 'carrierwave', '1.2.2'
-gem 'mini_magick', '4.7.0'
+gem 'carrierwave'
+gem 'mini_magick'
 
 
 group :development, :test do
