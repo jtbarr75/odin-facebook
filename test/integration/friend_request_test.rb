@@ -24,14 +24,8 @@ class FriendRequestTest < ActionDispatch::IntegrationTest
     assert_select "div p a", "0 Friends"
     assert_select "a[href=?]", user_friendships_path(@friend), count: 1
     sign_out @user
-    #other user should get notification
-    sign_in @friend
-    get root_path
-    assert_select "li.dropdown" do
-      assert_select "a", "Notifications 1"
-      assert_select "a[href=?]", user_friendships_path(@friend)
-    end
     #friend has list of requests and can accept
+    sign_in @friend
     get user_friendships_path(@friend)
     assert_template 'friendships/index'
     assert_select "a[href=?]", user_friendship_path(@friend, @friendship, status: 'active')
