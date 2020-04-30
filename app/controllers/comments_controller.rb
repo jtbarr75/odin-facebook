@@ -6,7 +6,7 @@ class CommentsController < ApplicationController
     @comment = @post.comments.build(params.require(:comment).permit(:body))
     @comment.user_id = current_user.id
     if @comment.save
-      @comment.notify(@post.user, "#{current_user.name} commented on your post")
+      @comment.notify(@post.user, "#{current_user.name} commented on your post") unless @post.user == current_user
       flash[:success] = "Commented!"
       redirect_back(fallback_location: root_url)
     else

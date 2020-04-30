@@ -5,7 +5,7 @@ class LikesController < ApplicationController
     @parent ||= Comment.find(params[:comment_id]) if params[:comment_id]
     @like = @parent.likes.build(user_id: current_user.id)
     if @like.save
-      @like.notify(@parent.user, "#{current_user.name} liked your #{@parent.class.name.downcase}")
+      @like.notify(@parent.user, "#{current_user.name} liked your #{@parent.class.name.downcase}") unless @parent.user == current_user
       redirect_back(fallback_location: root_path)
     else
       flash[:danger] = "Could not like the post"
