@@ -1,6 +1,9 @@
 <div class="row">
   <div class="well col-xs-8">
-    <p><%= @post.body %></p>
+    <div class="content">
+      <p><%= @post.body %></p>
+      <%= image_tag @post.picture.url if @post.picture? %>
+    </div>
     <i>Posted: <%= @post.created_at.strftime("%b %e, %Y") %> </i>
     <span class="label label-success"><%= pluralize(@post.likes.count, "Like")%></span>
     <% if @post.liked_by?(current_user) %>

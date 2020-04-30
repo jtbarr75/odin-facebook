@@ -11,7 +11,7 @@ class PostsController < ApplicationController
 
   def create
     @user = User.find(params[:user_id])
-    @post = @user.posts.build(params.require(:post).permit(:body))
+    @post = @user.posts.build(params.require(:post).permit(:body, :picture))
     if @post.save
       flash[:success] = "Post Created"
       redirect_to @user

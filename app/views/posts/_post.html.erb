@@ -1,6 +1,9 @@
 <% if post.valid? %>
   <div class="well col-xs-8">
-    <p><%= post.body %></p>
+    <div class="content">
+      <p><%= post.body %></p>
+      <%= image_tag post.picture.url if post.picture? %>
+    </div>
     Posted: <%= post.created_at.strftime("%b %e, %Y") %>
     <%= link_to "View post", user_post_path(post.user, post) %>
     <% if current_user == post.user %>
