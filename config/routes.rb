@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   root 'posts#index'
-  devise_for :users
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+
+  get 'auth/:provider/callback', to: 'devise/sessions#create'
+  get 'auth/failure', to: redirect('/')
+
   resources :users, only: [:index, :show] do
     resources :posts, only: [:show, :create, :destroy]
     resources :friendships, only: [:index, :create, :update, :destroy]
