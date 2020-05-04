@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
 
   def create
     @post = Post.find(params[:post_id])
-    @comment = @post.comments.build(params.require(:comment).permit(:body))
+    @comment = @post.comments.build(params.require(:comment).permit(:body, :picture))
     @comment.user_id = current_user.id
     if @comment.save
       @comment.notify(@post.user, "#{current_user.name} commented on your post") unless @post.user == current_user

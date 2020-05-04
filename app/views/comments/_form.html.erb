@@ -2,12 +2,16 @@
   <div class="well col-xs-8">
   <%= render 'shared/errors', obj: @comment%>
     <%= form_for([@post, @comment], :html => { class: "form", role: "form" }) do |f| %>
-      <div class='input-group'>
-        <%= f.text_field :body, class: "form-control" %>
-        <span class="input-group-btn">
-          <%= f.submit "Comment", class: 'btn btn-primary mb-2' %>
-        </span>
+      <div class='form-group'>
+        <%= f.text_area :body, rows: 2, class: "form-control" %>
       </div>
+      <div class="form-group">
+        <%= f.submit class: 'btn btn-primary btn-large' %>
+      </div>
+      <span class="picture">
+        <%= f.label :picture, 'Upload a photo' %>
+        <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png,image/jpg' %>
+      </span>
     <% end %>
   </div>
 </div>
