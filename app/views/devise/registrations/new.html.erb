@@ -49,6 +49,15 @@
 
       <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
+          <span class="picture">
+            <%= f.label :picture, 'Upload a photo' %>
+            <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png,image/jpg' %>
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
           <%= f.submit "Sign Up", class: "btn btn-primary btn-large" %>
         </div>
       </div>
