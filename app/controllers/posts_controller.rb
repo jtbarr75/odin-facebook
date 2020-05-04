@@ -3,6 +3,8 @@ class PostsController < ApplicationController
 
   def index
     @posts = current_user.timeline_posts
+    @user = current_user
+    @post = @user.posts.build
   end
 
   def show
