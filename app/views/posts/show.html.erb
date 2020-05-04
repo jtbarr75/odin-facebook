@@ -4,7 +4,7 @@
       <p><%= @post.body %></p>
       <%= image_tag @post.picture.url if @post.picture? %>
     </div>
-    <i>Posted: <%= @post.created_at.strftime("%b %e, %Y") %> </i>
+    <i>Posted: <%= @post.created_at_pst %> </i>
     <%= render 'likes/like', post: @post%>
   </div>
 </div>

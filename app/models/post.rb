@@ -10,6 +10,10 @@ class Post < ApplicationRecord
   validates :body, presence: true
   validate :picture_size
 
+  def created_at_pst
+    self.created_at.in_time_zone("Pacific Time (US & Canada)").strftime("%b %e, %Y %l:%M %p")
+  end
+
   private
 
     def picture_size
