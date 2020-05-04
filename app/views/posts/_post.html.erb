@@ -5,7 +5,7 @@
       <%= image_tag post.picture.url if post.picture? %>
     </div>
     <%= link_to post.user.name, post.user %> posted: <%= post.created_at.strftime("%b %e, %Y") %>
-    <%= link_to "View post", user_post_path(post.user, post) %>
+    <%= link_to pluralize(post.comments.count, 'comment'), user_post_path(post.user, post) %>
     <% if current_user == post.user %>
       <%= link_to "Delete", user_post_path(current_user, post), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-default btn-xs" %>
     <% end %>
