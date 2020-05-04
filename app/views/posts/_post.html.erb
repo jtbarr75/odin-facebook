@@ -9,5 +9,6 @@
     <% if current_user == post.user %>
       <%= link_to "Delete", user_post_path(current_user, post), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-default btn-xs" %>
     <% end %>
+    <%= render 'likes/like', post: post%>
   </div>
 <% end %>
