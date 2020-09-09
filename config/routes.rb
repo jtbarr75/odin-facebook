@@ -2,12 +2,13 @@ Rails.application.routes.draw do
   root 'posts#index'
   get '/*path' => 'homepage#index';
 
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+
+  get 'auth/:provider/callback', to: 'devise/sessions#create'
+  get 'auth/failure', to: redirect('/')
+
   namespace 'api' do 
     namespace 'v1' do
-      devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
-
-      get 'auth/:provider/callback', to: 'devise/sessions#create'
-      get 'auth/failure', to: redirect('/')
     
       resources :users, only: [:index, :show] do
         resources :posts, only: [:show, :create, :destroy]
