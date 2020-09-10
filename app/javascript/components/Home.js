@@ -1,9 +1,12 @@
 import React from 'react';
+import Nav from './Nav';
 
 class Home extends React.Component {
   render() {
     return (
-      <div>This is the Home page</div>
+      <div>
+        <Nav />
+      </div>
     )
   }
 }
