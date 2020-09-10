@@ -6,7 +6,13 @@ class WelcomeController < ApplicationController
   end
 
   def app 
-
+    signed_in = user_signed_in?
+    @currentUser = {
+      name: current_user.name,
+      id: current_user.id,
+      notifications: current_user.notifications,
+      signedIn: signed_in
+    }
   end
 
 end
