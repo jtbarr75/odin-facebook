@@ -104,6 +104,8 @@ GEM
       i18n (>= 1.6, < 2)
     faraday (1.0.1)
       multipart-post (>= 1.2, < 3)
+    fast_jsonapi (1.5)
+      activesupport (>= 4.2)
     ffi (1.12.2)
     figaro (1.1.1)
       thor (~> 0.14)
@@ -312,6 +314,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   devise
   faker (~> 2.13)
+  fast_jsonapi (~> 1.5)
   figaro
   fog-aws
   jbuilder (~> 2.5)

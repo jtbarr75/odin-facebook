@@ -14,6 +14,10 @@ class Post < ApplicationRecord
     self.created_at.in_time_zone("Pacific Time (US & Canada)").strftime("%b %e, %Y %l:%M %p")
   end
 
+  def username
+    self.user.name
+  end
+
   private
 
     def picture_size

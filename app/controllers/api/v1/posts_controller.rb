@@ -1,12 +1,17 @@
 module Api
   module V1
     class PostsController < ApplicationController
-      before_action :require_login
+      # before_action :require_login
     
       def index
-        @posts = current_user.timeline_posts
-        @user = current_user
-        @post = @user.posts.build
+        posts = current_user.timeline_posts
+        # @user = current_user
+        # @post = @user.posts.build
+        if user_signed_in?
+          render json: PostSerializer.new(posts).serialized_json
+        else
+          render json: {}, status: 401
+        end
       end
     
       def show

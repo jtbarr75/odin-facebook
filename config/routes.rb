@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get 'auth/:provider/callback', to: 'devise/sessions#create'
   get 'auth/failure', to: redirect('/')
 
-  get '/*path' => 'welcome#app'
+  # get '/*path' => 'welcome#app'
 
   namespace 'api' do 
     namespace 'v1' do

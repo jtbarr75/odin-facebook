@@ -13,6 +13,8 @@ class WelcomeController < ApplicationController
       notifications: current_user.notifications,
       signedIn: signed_in
     }
+    @posts = Post.all
+    @post  = current_user.posts.build(body: "")
   end
 
 end

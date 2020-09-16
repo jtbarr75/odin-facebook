@@ -1,2 +1,3 @@
 <div id="root"></div>
 <%= react_component("Nav", { currentUser: @currentUser }) %>
+<%= react_component("Timeline", { currentUser: @currentUser, posts: @posts, post: @post }) %>
