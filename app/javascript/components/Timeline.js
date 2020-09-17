@@ -18,7 +18,6 @@ class Timeline extends React.Component {
     const url = "/api/v1/posts.json" //need to set up api to give the right posts
     axios.get(url)
       .then(response => {
-        console.log(response)
         this.setState({  
           posts: response.data.data
         });
@@ -47,7 +46,6 @@ class Timeline extends React.Component {
     let postsList;
     if (posts) {
       postsList = posts.map((post, index) => {
-        console.log(post)
         return (
           <div key={index} className="well col-xs-8">
             <div className="content">

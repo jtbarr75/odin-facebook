@@ -5,7 +5,6 @@ module Api
     
       def index
         posts = current_user.timeline_posts
-        # @user = current_user
         # @post = @user.posts.build
         if user_signed_in?
           render json: PostSerializer.new(posts).serialized_json
