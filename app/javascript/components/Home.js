@@ -9,19 +9,16 @@ class Home extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      currentUser: {}
+      currentUser: this.props.currentUser
     }
   }
 
-  componentDidMount() {
-
-  }
-
   render() {
+    const {currentUser} = this.state;
     return (
       <div>
-        <Nav />
-        <Timeline />
+        <Nav currentUser={currentUser}/>
+        <Timeline currentUser={currentUser}/>
       </div>
     )
   }

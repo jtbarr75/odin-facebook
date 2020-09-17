@@ -1,5 +1,4 @@
-import React from "react"
-import PropTypes from "prop-types"
+import React, { Fragment } from "react"
 
 class Nav extends React.Component {
   constructor(props) {
@@ -11,7 +10,6 @@ class Nav extends React.Component {
 
   render () {
     const { currentUser } = this.state;
-    let navSection;
     let notifications;
 
     if (currentUser.notifications.length > 0) {
@@ -24,9 +22,8 @@ class Nav extends React.Component {
       notifications = <li>Nothing new...</li>
     }
 
-    if (currentUser.signedIn) {
-      navSection = 
-      <>
+    const navSection = 
+      <Fragment>
         <li className="dropdown">
           <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
             Notifications 
@@ -49,14 +46,10 @@ class Nav extends React.Component {
             <li ><a href="#">Sign Out</a></li>
           </ul>
         </li>
-        </>
-    } else {
-      navSection = (<><li><a href="#">Sign Up</a></li>
-        <li><a href="#">Sign In</a></li></>)
-    }
+      </Fragment>
 
     return (
-      <React.Fragment>
+      <Fragment>
         <nav className="navbar navbar-default">
           <div className="container-fluid">
             {/* <!-- Brand and toggle get grouped for better mobile display --> */}
@@ -87,7 +80,7 @@ class Nav extends React.Component {
             </div>
           </div>
         </nav>
-      </React.Fragment>
+      </Fragment>
     );
   }
 }
