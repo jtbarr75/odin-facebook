@@ -1,4 +1,5 @@
 import React, { Fragment } from "react"
+import axios from "axios";
 
 class Nav extends React.Component {
   constructor(props) {
@@ -6,6 +7,20 @@ class Nav extends React.Component {
     this.state = {
       currentUser: this.props.currentUser
     }
+
+    this.handleLogout = this.handleLogout.bind(this)
+  }
+
+  handleLogout(e) {
+    e.preventDefault()
+    const token = document.querySelector('[name=csrf-token]').content
+    axios.defaults.headers.common['X-CSRF-TOKEN'] = token
+
+    axios.delete('/users/sign_out')
+    .then(() => {
+      this.props.setCurrentUser({})
+      this.props.changePage('login')
+    })
   }
 
   render () {
@@ -43,7 +58,7 @@ class Nav extends React.Component {
             <li><a href="#">Your Profile</a></li>
             <li><a href="#">Edit Profile</a></li>
             <li role="separator" className="divider"></li>
-            <li ><a href="#">Sign Out</a></li>
+            <li ><button onClick={this.handleLogout}>Sign Out</button></li>
           </ul>
         </li>
       </Fragment>
