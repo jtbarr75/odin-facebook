@@ -3,12 +3,12 @@ class WelcomeController < ApplicationController
   
   def app
     @currentUser = {}
-    @signedIn = user_signed_in?
     if user_signed_in?
       @currentUser = {
         name: current_user.name,
         id: current_user.id,
         notifications: current_user.notifications,
+        signedIn: user_signed_in?
       }
     end
   end

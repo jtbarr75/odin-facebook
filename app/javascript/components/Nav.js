@@ -18,8 +18,7 @@ class Nav extends React.Component {
 
     axios.delete('/users/sign_out')
     .then(() => {
-      this.props.setCurrentUser({})
-      this.props.changePage('login')
+      window.location.reload(false);
     })
   }
 

@@ -11,7 +11,8 @@ class SessionsController < Devise::SessionsController
       user_info = {
         id: @user.id,
         name: @user.name,
-        notifications: @user.notifications
+        notifications: @user.notifications,
+        signedIn: user_signed_in?
       }
       render json: user_info
     else

@@ -8,9 +8,8 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      page: this.props.signedIn ? 'home' : 'login',
-      currentUser: this.props.currentUser,
-      signedIn: this.props.signedIn
+      page: this.props.currentUser.signedIn ? 'home' : 'login',
+      currentUser: this.props.currentUser
     }
     this.changePage = this.changePage.bind(this)
     this.setCurrentUser = this.setCurrentUser.bind(this)
@@ -20,11 +19,6 @@ class App extends React.Component {
     this.setState({
       page: newPage
     })
-    if (newPage=="home" && this.state.signedIn == false) {
-      this.setState({
-        signedIn: true
-      })
-    }
   }
 
   setCurrentUser(user) {
