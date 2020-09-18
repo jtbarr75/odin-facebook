@@ -4,7 +4,14 @@ class RegistrationsController < Devise::RegistrationsController
   def create
     @user = User.new(user_params)
     if @user.save
-      render json: @user
+      sign_in :user, @user
+      user_info = {
+        id: @user.id,
+        name: @user.name,
+        notifications: @user.notifications,
+        signedIn: user_signed_in?
+      }
+      render json: user_info
     else
       warden.custom_failure!
       render json: { error: 'signup error' }, status: :unprocessable_entity
@@ -34,6 +41,6 @@ end
   private
 
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
 end

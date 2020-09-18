@@ -34,7 +34,7 @@ class App extends React.Component {
       case 'login':
         return <Login changePage={this.changePage} setCurrentUser={this.setCurrentUser}/>
       case 'signup':
-        return <Signup changePage={this.changePage}/>
+        return <Signup changePage={this.changePage} setCurrentUser={this.setCurrentUser}/>
     }
       
   }

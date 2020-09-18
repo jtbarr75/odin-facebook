@@ -12,7 +12,7 @@ class Login extends React.Component {
     e.preventDefault()
     const token = document.querySelector('[name=csrf-token]').content
     axios.defaults.headers.common['X-CSRF-TOKEN'] = token
-    
+
     const userInfo = {
       user: {
         email: document.getElementById('email').value,
@@ -41,9 +41,10 @@ class Login extends React.Component {
               <input id="password" type="password" name="password" />
             </div>
             <div className="form-group">
-              <button onClick={this.handleLogin}>Submit</button>
+              <button onClick={this.handleLogin}>Log In</button>
             </div>
           </form>
+          <button onClick={()=>this.props.changePage('signup')}>Sign Up!</button>
         </div>
       </div>
     )
