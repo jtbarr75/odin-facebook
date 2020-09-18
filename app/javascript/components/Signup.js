@@ -76,7 +76,9 @@ class Signup extends React.Component {
                 </div>
               </div>
             </form>
-            <button onClick={()=>this.props.changePage('login')}>Log In</button>
+            <div className="col-sm-offset-2 col-sm-10">
+              <button className="btn btn-primary btn-large" onClick={()=>this.props.changePage('login')}>Log In</button>
+            </div> 
           </div>
         </div>
       </Fragment>
