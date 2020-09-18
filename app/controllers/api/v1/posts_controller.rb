@@ -6,7 +6,7 @@ module Api
       def index
         posts = current_user.timeline_posts
         if user_signed_in?
-          render json: PostSerializer.new(posts).serialized_json
+          render json: posts
         else
           render json: {}, status: 401
         end

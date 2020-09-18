@@ -1,6 +1,7 @@
 import React from 'react'
 import Errors from './Errors'
 import Like from './Likes/Like'
+import Post from './Post'
 import PostForm from './PostForm'
 import axios from 'axios'
 
@@ -18,8 +19,9 @@ class Timeline extends React.Component {
     const url = "/api/v1/posts.json" //need to set up api to give the right posts
     axios.get(url)
       .then(response => {
+        console.log(response)
         this.setState({  
-          posts: response.data.data
+          posts: response.data
         });
         
       })
@@ -39,18 +41,7 @@ class Timeline extends React.Component {
     if (posts) {
       postsList = posts.map((post, index) => {
         return (
-          <div key={index} className="well col-xs-8">
-            <div className="content">
-              <p>{post.attributes.body}</p>
-              { post.attributes.picture && <img src={post.attributes.picture}/> }
-            </div>
-            <a href="#">{post.attributes.username} posted: {post.attributes.created_at_pst}</a>
-            <a href="#">{post.relationships.comments.data.count} comments</a>
-            {this.props.currentUser.id == post.attributes.user_id && 
-              <button className="btn btn-default btn-xs" >Delete</button>
-            }
-            <Like currentUser={this.props.currentUser} obj={post} />
-          </div>
+          <Post key={index} post={post} currentUser={this.props.currentUser}/>
         )
       })
     }

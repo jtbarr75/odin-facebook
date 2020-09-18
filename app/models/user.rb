@@ -49,7 +49,16 @@ class User < ApplicationRecord
     Post.joins(:user)
       .where( users: { id: self.active_friends.select(:id) })
       .or(Post.joins(:user).where(users: { id: self.id }))
-      .desc
+      .includes(:comments, :likes, :user)
+      .map { |post| post.data } 
+  end
+
+  #information for posts or comments
+  def post_data
+    return {
+      id: self.id,
+      name: self.name
+    }
   end
 
   def self.from_omniauth(auth)

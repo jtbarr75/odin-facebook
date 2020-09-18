@@ -18,6 +18,18 @@ class Post < ApplicationRecord
     self.user.name
   end
 
+  def data
+    return {
+      id: self.id,
+      body: self.body,
+      picture: self.picture,
+      createdAt: self.created_at_pst,
+      comments: self.comments,
+      likes: self.likes,
+      user: self.user.post_data
+    }
+  end
+
   private
 
     def picture_size
