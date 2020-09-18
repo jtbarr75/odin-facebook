@@ -1,17 +1,17 @@
 import React from 'react'
 import Errors from './Errors'
 import Like from './Likes/Like'
+import PostForm from './PostForm'
 import axios from 'axios'
 
 class Timeline extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      post: {body: ""}
+      posts: []
     }
-    this.handlePostChange = this.handlePostChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.fileInput = React.createRef();
+
+    this.addPost = this.addPost.bind(this)
   }
 
   componentDidMount() {
@@ -26,22 +26,14 @@ class Timeline extends React.Component {
       .catch(error => console.log(error))
   }
 
-  handlePostChange(event) {
-    const { post } = { ...this.state };
-    const currentPost = post;
-    const { name, value } = event.target;
-    currentPost[name] = value;
-    this.setState({ post: currentPost});
-  }
-
-  handleSubmit(event) {
-    event.preventDefault();
-    this.fileInput.current.files[0]
-    console.log("some code is going to post this")
+  addPost(post) {
+    this.setState({
+      posts: [post, ...this.state.posts]
+    })
   }
 
   render() {
-    const { posts, post } = this.state;
+    const { posts } = this.state;
     
     let postsList;
     if (posts) {
@@ -64,22 +56,8 @@ class Timeline extends React.Component {
     }
     
     return (
-      <div className="row">
-        <div className="well col-xs-8">
-          {/* <Errors obj={post} /> */}
-          <form className="form" onSubmit={this.handleSubmit}>
-            <div className='form-group'>
-              <input type="textarea" name="body" className="form-control" value={post.body} onChange={this.handlePostChange} rows="2"/>
-            </div>
-            <div className="form-group">
-              <button type="submit" className="btn btn-primary btn-large" >Submit</button>
-            </div>
-            <span className="picture">
-              <label name="picture" >Upload a photo</label>
-              <input type="file"  accept="image/gif, image/jpeg, image/png" name="picture" id="post-picture" ref={this.fileInput}/>
-            </span>
-          </form>
-        </div>
+      <div className="container">
+        <PostForm currentUser={this.props.currentUser} addPost = {this.addPost}/>
         {postsList}
       </div>
     )

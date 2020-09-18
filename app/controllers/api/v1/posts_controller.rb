@@ -5,7 +5,6 @@ module Api
     
       def index
         posts = current_user.timeline_posts
-        # @post = @user.posts.build
         if user_signed_in?
           render json: PostSerializer.new(posts).serialized_json
         else
@@ -23,9 +22,9 @@ module Api
         @post = @user.posts.build(params.require(:post).permit(:body, :picture))
         if @post.save
           flash[:success] = "Post Created"
-          redirect_to @user
+          render json: PostSerializer.new(@post).serialized_json
         else
-          render 'users/show'
+          render json: {}, status: 422
         end
       end
     
