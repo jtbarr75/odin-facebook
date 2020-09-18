@@ -61,6 +61,15 @@ class User < ApplicationRecord
     }
   end
 
+  def data
+    return {
+      id: self.id,
+      name: self.name,
+      posts: self.posts.map { |post| post.data },
+      friends: self.friends
+    }
+  end
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email

@@ -17,7 +17,6 @@ class Home extends React.Component {
     const {currentUser} = this.state;
     return (
       <div>
-        <Nav currentUser={currentUser} changePage={this.props.changePage} setCurrentUser={this.props.setCurrentUser}/>
         <Timeline currentUser={currentUser}/>
       </div>
     )

@@ -1,7 +1,20 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :set_current_user
 
   private
+
+    def set_current_user
+      @currentUser = {}
+      if user_signed_in?
+        @currentUser = {
+          name: current_user.name,
+          id: current_user.id,
+          notifications: current_user.notifications,
+          signedIn: user_signed_in?
+        }
+      end
+    end
 
     def require_login
       unless user_signed_in? 

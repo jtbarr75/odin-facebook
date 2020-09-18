@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :users, only: [:index, :show]
   root 'welcome#app'
   devise_for :users, controllers: { registrations: 'registrations', sessions: 'sessions' }
   

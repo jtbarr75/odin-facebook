@@ -4,6 +4,7 @@ import axios from "axios";
 class Nav extends React.Component {
   constructor(props) {
     super(props);
+    console.log(props)
     this.state = {
       currentUser: this.props.currentUser
     }
@@ -24,6 +25,9 @@ class Nav extends React.Component {
 
   render () {
     const { currentUser } = this.state;
+    if ( Object.keys(currentUser).length === 0) {
+      return null;
+    }
     let notifications;
 
     if (currentUser.notifications.length > 0) {
