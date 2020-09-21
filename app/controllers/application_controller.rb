@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
     def require_login
       unless user_signed_in? 
         flash[:danger] = "Please sign in"
-        redirect_to new_user_session_path
+        redirect_to login_path
       end
     end
 

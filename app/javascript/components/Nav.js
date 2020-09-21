@@ -4,7 +4,6 @@ import axios from "axios";
 class Nav extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props)
     this.state = {
       currentUser: this.props.currentUser
     }
@@ -19,7 +18,7 @@ class Nav extends React.Component {
 
     axios.delete('/users/sign_out')
     .then(() => {
-      window.location.reload(false);
+      window.location.href = "/login"
     })
   }
 

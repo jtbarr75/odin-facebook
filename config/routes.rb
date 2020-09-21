@@ -25,6 +25,8 @@ Rails.application.routes.draw do
 
   resources :users, only: [:index, :show]
   root 'welcome#app'
+  get '/login', to: 'welcome#login'
+  get '/signup', to: 'welcome#signup'
   devise_for :users, controllers: { registrations: 'registrations', sessions: 'sessions' }
   
   # get 'auth/:provider/callback', to: 'devise/sessions#create'

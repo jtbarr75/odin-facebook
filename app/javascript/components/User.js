@@ -4,7 +4,6 @@ import Post from './Post'
 class User extends React.Component {
   constructor(props) {
     super(props)
-    console.log(props)
   }
 
   render () {

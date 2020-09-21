@@ -23,8 +23,7 @@ class Signup extends React.Component {
     }
     axios.post('/users', userInfo)
     .then((response) => {
-      this.props.setCurrentUser(response.data)
-      this.props.changePage('home')
+      window.location.href = "/"
     })
     .catch((err) => {console.log(err)})
   }
@@ -77,7 +76,7 @@ class Signup extends React.Component {
               </div>
             </form>
             <div className="col-sm-offset-2 col-sm-10">
-              <button className="btn btn-primary btn-large" onClick={()=>this.props.changePage('login')}>Log In</button>
+              <a href="/login" className="btn btn-primary btn-large">Log In</a>
             </div> 
           </div>
         </div>

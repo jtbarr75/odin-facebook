@@ -16,7 +16,7 @@ class Timeline extends React.Component {
   }
 
   componentDidMount() {
-    const url = "/api/v1/posts.json" //need to set up api to give the right posts
+    const url = "/api/v1/posts.json"
     axios.get(url)
       .then(response => {
         this.setState({  

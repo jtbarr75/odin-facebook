@@ -15,27 +15,8 @@ class App extends React.Component {
     this.setCurrentUser = this.setCurrentUser.bind(this)
   }
 
-  changePage(newPage) {
-    this.setState({
-      page: newPage
-    })
-  }
-
-  setCurrentUser(user) {
-    this.setState({
-      currentUser: user
-    })
-  }
-
   render() {
-    switch(this.state.page) {
-      case 'home':
-        return <Home currentUser={this.state.currentUser} changePage={this.changePage} setCurrentUser={this.setCurrentUser}/>
-      case 'login':
-        return <Login changePage={this.changePage} setCurrentUser={this.setCurrentUser}/>
-      case 'signup':
-        return <Signup changePage={this.changePage} setCurrentUser={this.setCurrentUser}/>
-    }
+    <Home currentUser={this.state.currentUser} changePage={this.changePage} setCurrentUser={this.setCurrentUser}/>
       
   }
 }
