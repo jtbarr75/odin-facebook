@@ -10,18 +10,19 @@ class PostForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    const body = document.getElementById('body')
     const token = document.querySelector('[name=csrf-token]').content
     axios.defaults.headers.common['X-CSRF-TOKEN'] = token
 
     const postInfo = {
       post: {
-        user_id: this.props.currentUser,
-        body: document.getElementById('body').value
+        body: body.value
       }
     }
     axios.post(`/api/v1/users/${this.props.currentUser.id}/posts`, postInfo)
     .then((response) => {
-      this.props.addPost(response.data.data)
+      this.props.addPost(response.data)
+      body.value = ""
     })
     .catch((err) => {console.log(err)})
   }

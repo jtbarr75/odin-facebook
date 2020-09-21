@@ -11,7 +11,7 @@ class Post extends React.Component {
           <p>{post.body}</p>
           { post.picture && <img src={post.picture}/> }
         </div>
-        <a href="#">{post.user.name} posted: {post.createdAt}</a>
+        <a href={`users/${post.user.id}`}>{post.user.name} posted: {post.createdAt}</a>
         <a href="#">{post.comments.length} comments</a>
         {this.props.currentUser.id == post.user.id && 
           <button className="btn btn-default btn-xs" >Delete</button>

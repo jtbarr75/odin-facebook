@@ -53,6 +53,13 @@ class User < ApplicationRecord
       .map { |post| post.data } 
   end
 
+  def posts_data
+    Post.joins(:user)
+      .where( users: { id: self.id })
+      .includes(:comments, :likes, :user)
+      .map { |post| post.data } 
+  end
+
   #information for posts or comments
   def post_data
     return {
@@ -65,7 +72,7 @@ class User < ApplicationRecord
     return {
       id: self.id,
       name: self.name,
-      posts: self.posts.map { |post| post.data },
+      posts: self.posts_data,
       friends: self.friends
     }
   end

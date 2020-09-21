@@ -35,7 +35,6 @@ class Timeline extends React.Component {
 
   render() {
     const { posts } = this.state;
-    
     let postsList;
     if (posts) {
       postsList = posts.map((post, index) => {

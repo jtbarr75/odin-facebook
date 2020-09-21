@@ -22,7 +22,7 @@ module Api
         @post = @user.posts.build(params.require(:post).permit(:body, :picture))
         if @post.save
           flash[:success] = "Post Created"
-          render json: PostSerializer.new(@post).serialized_json
+          render json: @post.data
         else
           render json: {}, status: 422
         end

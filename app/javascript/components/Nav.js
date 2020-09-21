@@ -7,7 +7,6 @@ class Nav extends React.Component {
     this.state = {
       currentUser: this.props.currentUser
     }
-
     this.handleLogout = this.handleLogout.bind(this)
   }
 
@@ -32,7 +31,7 @@ class Nav extends React.Component {
     if (currentUser.notifications.length > 0) {
       notifications = currentUser.notifications.map(notification => {
         <li className={notification.unread ? "bg-light-grey" : ""}>
-          <a href="#" method="PATCH" id={`notification-${notification.id}`}>{notification.message}</a>
+          <a href="#" id={`notification-${notification.id}`}>{notification.message}</a>
         </li>
       })
     } else {
@@ -102,7 +101,4 @@ class Nav extends React.Component {
   }
 }
 
-// Nav.propTypes = {
-//   currentUser: PropTypes.string
-// };
 export default Nav

@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   private
 
     def set_current_user
+      return @currentUser if @currentUser
       @currentUser = {}
       if user_signed_in?
         @currentUser = {
