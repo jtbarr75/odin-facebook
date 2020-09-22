@@ -1,7 +1,5 @@
 import React from "react"
 import Post from './Post'
-import Like from './Likes/Like'
-import axios from 'axios'
 
 class Posts extends React.Component {
   render () {

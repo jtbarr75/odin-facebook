@@ -1,9 +1,6 @@
 import React from 'react'
-import Errors from './Errors'
-import Like from './Likes/Like'
-import Post from './Post'
-import Posts from './Posts'
-import PostForm from './PostForm'
+import Posts from './Posts/Posts'
+import PostForm from './Posts/PostForm'
 import axios from 'axios'
 
 class Timeline extends React.Component {

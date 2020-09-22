@@ -1,5 +1,5 @@
 import React, { Fragment } from "react"
-import Post from './Post'
+import Post from './Posts/Post'
 
 class User extends React.Component {
   constructor(props) {

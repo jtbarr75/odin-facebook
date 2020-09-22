@@ -1,5 +1,4 @@
 import React from 'react';
-import Nav from './Nav';
 import Timeline from './Timeline';
 import axios from 'axios';
 
