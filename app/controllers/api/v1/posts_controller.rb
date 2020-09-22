@@ -31,8 +31,8 @@ module Api
       def destroy
         @post = Post.find(params[:id])
         @post.destroy
-        flash[:success] = "Post Deleted"
-        redirect_to current_user
+        flash.now[:success] = "Post Deleted"
+        render json: { post: @post, message: "deleted post" }
       end
     
     end

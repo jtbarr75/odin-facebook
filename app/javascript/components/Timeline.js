@@ -2,6 +2,7 @@ import React from 'react'
 import Errors from './Errors'
 import Like from './Likes/Like'
 import Post from './Post'
+import Posts from './Posts'
 import PostForm from './PostForm'
 import axios from 'axios'
 
@@ -13,6 +14,7 @@ class Timeline extends React.Component {
     }
 
     this.addPost = this.addPost.bind(this)
+    this.removePost = this.removePost.bind(this)
   }
 
   componentDidMount() {
@@ -22,7 +24,6 @@ class Timeline extends React.Component {
         this.setState({  
           posts: response.data
         });
-        
       })
       .catch(error => console.log(error))
   }
@@ -33,21 +34,17 @@ class Timeline extends React.Component {
     })
   }
 
+  removePost(post) {
+    let postsCopy = [...this.state.posts].filter(p => p.id != post.id);
+    this.setState({posts: postsCopy});
+  }
+
   render() {
-    const { posts } = this.state;
-    let postsList;
-    if (posts) {
-      postsList = posts.map((post, index) => {
-        return (
-          <Post key={index} post={post} currentUser={this.props.currentUser}/>
-        )
-      })
-    }
-    
+
     return (
       <div className="container">
         <PostForm currentUser={this.props.currentUser} addPost = {this.addPost}/>
-        {postsList}
+        <Posts currentUser={this.props.currentUser} posts={this.state.posts} removePost={this.removePost}/>
       </div>
     )
   }
