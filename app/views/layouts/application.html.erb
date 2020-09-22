@@ -15,7 +15,7 @@
     <header>
       <%= react_component("Nav", { currentUser: @currentUser }) %>
     </header>
-    <%= render 'shared/messages'%>
+    <%= react_component("Flash/FlashMessages", { messages: flash_messages }) %>
     <div class="container">
       <%= yield %>
     </div>
