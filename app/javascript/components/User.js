@@ -1,11 +1,7 @@
 import React, { Fragment } from "react"
-import Post from './Posts/Post'
+import Posts from './Posts/Posts'
 
 class User extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-
   render () {
     const { user, currentUser } = this.props
     let edit;
@@ -24,29 +20,9 @@ class User extends React.Component {
     // } else {
     //   friendOptions = <p><span className="label label-primary">Send Friend Request</span></p>
     // }
-    let postsList;
-    if (user.posts) {
-      postsList = user.posts.map((post, index) => {
-        return (
-          <Post key={index} post={post} currentUser={this.props.currentUser}/>
-        )
-      })
-    }
+    
     return (
-      <Fragment>
-        <div className="container">
-          <h2 align="left ">{user.name}</h2>
-          {/* <img href={user.picture && user.picture.url} > */}
-          <p><a href="#">{user.friends.length} Friends</a></p>
-          <p>Email: { user.email }</p>
-          {edit}
-          {friendOptions}
-        </div>
-
-        <div className="container ">
-          {postsList}
-        </div>
-      </Fragment>
+      <Posts currentUser={this.props.currentUser} />
     )
   }
 }
