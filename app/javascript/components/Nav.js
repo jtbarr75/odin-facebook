@@ -44,37 +44,36 @@ class Nav extends React.Component {
         </button>
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav mr-auto">
-            <li className="nav-item active">
-              <a className="nav-link" href="#">Home <span className="sr-only">(current)</span></a>
-            </li>
+          <ul className="navbar-nav">
             <li className="nav-item">
               <a className="nav-link" href="#">Users</a>
+            </li>
+          </ul>
+          <form className="form-inline mr-auto" action="/action_page.php">
+            <input className="form-control mr-sm-2" type="text" placeholder="Search"/>
+            <button className="btn btn-success" type="submit">Search</button>
+          </form>
+          <ul className="navbar-nav ml-auto">
+          <li className="nav-item dropdown">
+              <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Notifications <span className="badge badge-primary"> {currentUser.notifications.length} </span>
+              </a>
+              <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                {notifications}
+              </div>
             </li>
             <li className="nav-item dropdown">
               <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 {currentUser.name}
               </a>
-              <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+              <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                 <a className="dropdown-item" href="#">Your Profile</a>
                 <a className="dropdown-item" href="#">Edit Profile</a>
                 <div className="dropdown-divider"></div>
                 <a className="dropdown-item" onClick={this.handleLogout}>Sign Out</a>
               </div>
             </li>
-            <li className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Notifications <span className="badge"> {currentUser.notifications.length} </span> <span className="caret"></span>
-              </a>
-              <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                {notifications}
-              </div>
-            </li>
           </ul>
-          <form className="form-inline" action="/action_page.php">
-            <input className="form-control mr-sm-2" type="text" placeholder="Search"/>
-            <button className="btn btn-success" type="submit">Search</button>
-          </form>
         </div>
       </nav>
     );
