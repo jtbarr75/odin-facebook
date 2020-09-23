@@ -22,7 +22,6 @@ class Post extends React.Component {
 
   render () {
     const { post, index } = this.props
-    console.log(post.picture)
     return (
       <div className="card mt-4">
         <div className="card-body">
