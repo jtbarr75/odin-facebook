@@ -30,18 +30,12 @@ class PostForm extends React.Component {
 
   render() {
     return (
-        <div className="row justify-content-center">
-          <div className="col-8">
-            <div className="card mt-4 w-100">
-              <div className="card-body">
-                <form className="form-inline justify-content-center">
-                  <div className='form-group'>
-                    <input type="textarea" id="body" className="form-control" placeholder="What's on your mind?"/>
-                  </div>
-                  <button type="submit" onClick={this.handleSubmit} className="btn btn-primary">Submit</button>
-                </form>
-              </div>
-            </div>
+        <div className="card mt-4 w-100">
+          <div className="card-body">
+            <form className="form-inline justify-content-center">
+              <input type="textarea" id="body" className="form-control" placeholder="What's on your mind?"/>
+              <button type="submit" onClick={this.handleSubmit} className="btn btn-primary">Submit</button>
+            </form>
           </div>
         </div>
     )

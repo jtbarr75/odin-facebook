@@ -30,9 +30,6 @@ class User extends React.Component {
           <p>Email: { user.email }</p>
           {edit}
           {friendOptions}
-        </div>
-
-        <div className="container ">
           <Posts currentUser={currentUser} posts={this.props.user.posts}/>
         </div>
       </Fragment>
