@@ -16,9 +16,8 @@ class Posts extends React.Component {
 
   componentDidMount() {
     if (this.props.posts) {
-      console.log("loaded in posts from props")
       this.setState({
-        posts: posts
+        posts: this.props.posts
       })
     } else {
       axios.get("/api/v1/posts.json")

@@ -20,9 +20,22 @@ class User extends React.Component {
     // } else {
     //   friendOptions = <p><span className="label label-primary">Send Friend Request</span></p>
     // }
-    
+
     return (
-      <Posts currentUser={this.props.currentUser} />
+      <Fragment>
+        <div className="container">
+          <h2 align="left ">{user.name}</h2>
+          {/* <img href={user.picture && user.picture.url} > */}
+          <p><a href="#">{user.friends.length} Friends</a></p>
+          <p>Email: { user.email }</p>
+          {edit}
+          {friendOptions}
+        </div>
+
+        <div className="container ">
+          <Posts currentUser={currentUser} posts={this.props.user.posts}/>
+        </div>
+      </Fragment>
     )
   }
 }
