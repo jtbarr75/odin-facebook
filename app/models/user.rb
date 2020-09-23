@@ -50,6 +50,7 @@ class User < ApplicationRecord
       .where( users: { id: self.active_friends.select(:id) })
       .or(Post.joins(:user).where(users: { id: self.id }))
       .includes(:comments, :likes, :user)
+      .order('posts.created_at DESC')
       .map { |post| post.data } 
   end
 
@@ -57,6 +58,7 @@ class User < ApplicationRecord
     Post.joins(:user)
       .where( users: { id: self.id })
       .includes(:comments, :likes, :user)
+      .order('posts.created_at DESC')
       .map { |post| post.data } 
   end
 
