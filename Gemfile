@@ -17,7 +17,7 @@ gem 'uglifier', '>= 1.3.0'
 # gem 'mini_racer', platforms: :ruby
 gem 'webpacker'
 
-gem 'bootstrap-sass', '~> 3.4.1'
+gem 'bootstrap', '~> 5.0.0.alpha1'
 gem 'sassc-rails', '>= 2.1.0'
 gem 'jquery-rails'
 
@@ -79,3 +79,5 @@ gem "react-rails", "~> 2.6"
 gem "faker", "~> 2.13"
 
 gem "fast_jsonapi", "~> 1.5"
+
+gem "sprockets-rails", "~> 3.2"

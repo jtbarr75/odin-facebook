@@ -13,7 +13,7 @@ class Posts extends React.Component {
       })
     }
     return (
-      <div className="container">
+      <div className="row justify-content-center">
         {postsList} 
       </div>
     )
