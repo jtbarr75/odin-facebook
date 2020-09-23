@@ -20,6 +20,18 @@ class Post extends React.Component {
     .catch((err) => {console.log(err)})
   }
 
+  handleLike(post) {
+    const token = document.querySelector('[name=csrf-token]').content
+    axios.defaults.headers.common['X-CSRF-TOKEN'] = token
+    const url = `/api/v1/posts/${post.id}/likes`
+    axios.post(url)
+    .then((response) => {
+      // this.props.updatePost(response.data.post)
+      console.log(response)
+    })
+    .catch((err) => {console.log(err)})
+  }
+
   render () {
     const { post, index } = this.props
     return (
@@ -48,7 +60,7 @@ class Post extends React.Component {
           </div>
         </div>
         <div className="card-footer d-flex justify-content-between">
-          <button className="btn btn-primary">Like</button>
+          <button className="btn btn-primary" onClick={ ()=>this.handleLike(post)}>Like</button>
           <button className="btn btn-primary">Comment</button>
         </div>
       </div>
