@@ -7,6 +7,7 @@ class Nav extends React.Component {
     this.state = {
       currentUser: this.props.currentUser
     }
+    console.log(props)
     this.handleLogout = this.handleLogout.bind(this)
   }
 
@@ -27,14 +28,15 @@ class Nav extends React.Component {
       return null;
     }
     let notifications;
-
     if (currentUser.notifications.length > 0) {
       notifications = currentUser.notifications.map(notification => {
-          <a href="#" className="dropdown-item" id={`notification-${notification.id}`}>{notification.message}</a>
+          return (<a href="#" className="dropdown-item" id={`notification-${notification.id}`}>{notification.message}</a>)
       })
     } else {
       notifications = <a href="#" className="dropdown-item">Nothing new...</a>
     }
+
+    console.log(notifications)
 
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
