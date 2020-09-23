@@ -12,6 +12,7 @@ class Posts extends React.Component {
 
     this.addPost = this.addPost.bind(this)
     this.removePost = this.removePost.bind(this)
+    this.updatePost = this.updatePost.bind(this)
   }
 
   componentDidMount() {
@@ -42,13 +43,19 @@ class Posts extends React.Component {
     this.setState({posts: postsCopy});
   }
 
+  updatePost(post) {
+    let posts = [...this.state.posts];
+    posts = posts.map(p => p.id == post.id ? post : p)
+    this.setState({posts: posts});
+  }
+
   render () {
     const { posts } = this.state;
     let postsList;
     if (posts) {
       postsList = posts.map((post, index) => {
         return (
-          <Post key={index} post={post} currentUser={this.props.currentUser} removePost={this.removePost}/>
+          <Post key={index} post={post} currentUser={this.props.currentUser} removePost={this.removePost} updatePost={this.updatePost}/>
         )
       })
     }

@@ -8,7 +8,7 @@ module Api
         @like = @parent.likes.build(user_id: current_user.id)
         if @like.save
           @like.notify(@parent.user, "#{current_user.name} liked your #{@parent.class.name.downcase}") #unless @parent.user == current_user
-          render json: {success: "post liked", likable: @parent}, status: :ok
+          render json: {success: "post liked", likable: @parent.data}, status: :ok
         else
           render json: { error: 'like error' }, status: :unprocessable_entity
         end
@@ -16,8 +16,9 @@ module Api
 
       def destroy
         @like = Like.find(params[:id])
+        likable = @like.likable
         if @like.destroy
-          render :json=> { success: 'post unliked' }, status: :ok
+          render :json=> { success: 'post unliked', likable: likable.data }, status: :ok
         else
           render :json=> { error: 'post couldnt be unliked' }, status: :unprocessable_entity
         end

@@ -25,8 +25,7 @@ class Post extends React.Component {
     const url = `/api/v1/posts/${post.id}/likes`
     axios.post(url)
     .then((response) => {
-      // this.props.updatePost(response.data.post)
-      console.log(response)
+      this.props.updatePost(response.data.likable)
     })
     .catch((err) => {console.log(err)})
   }
@@ -37,8 +36,7 @@ class Post extends React.Component {
     const url = `/api/v1/likes/${like.id}`
     axios.delete(url)
     .then((response) => {
-      // this.props.updatePost(response.data.post)
-      console.log(response)
+      this.props.updatePost(response.data.likable)
     })
     .catch((err) => {console.log(err)})
   }
