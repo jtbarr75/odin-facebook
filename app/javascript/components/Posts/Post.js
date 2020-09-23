@@ -24,7 +24,7 @@ class Post extends React.Component {
     const { post, index } = this.props
     console.log(post.picture)
     return (
-      <div className="card">
+      <div className="card mt-4">
         <div className="card-body">
           <div className="d-flex justify-content-between">
             <h5 className="card-title"><a href={`users/${post.user.id}`}>{post.user.name}</a></h5>

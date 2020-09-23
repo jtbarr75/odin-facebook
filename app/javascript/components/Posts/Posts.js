@@ -14,7 +14,7 @@ class Posts extends React.Component {
     }
     return (
       <div className="row justify-content-center">
-        <div className="col-xs-8">
+        <div className="col-8">
           {postsList} 
         </div>
       </div>
