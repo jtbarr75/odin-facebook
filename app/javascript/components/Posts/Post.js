@@ -1,5 +1,4 @@
 import React from "react"
-import Like from '../Likes/Like'
 import axios from 'axios'
 
 class Post extends React.Component {
@@ -32,6 +31,29 @@ class Post extends React.Component {
     .catch((err) => {console.log(err)})
   }
 
+  handleUnlike(like) {
+    const token = document.querySelector('[name=csrf-token]').content
+    axios.defaults.headers.common['X-CSRF-TOKEN'] = token
+    const url = `/api/v1/likes/${like.id}`
+    axios.delete(url)
+    .then((response) => {
+      // this.props.updatePost(response.data.post)
+      console.log(response)
+    })
+    .catch((err) => {console.log(err)})
+  }
+
+  likeSection() {
+    const { post, currentUser } = this.props
+    let like = post.likes.find(like => like.user_id == currentUser.id)
+    if (like) {
+      return <button className="btn btn-primary" onClick={ ()=>this.handleUnlike(like)}>Unlike</button>
+    } else {
+      return <button className="btn btn-primary" onClick={ ()=>this.handleLike(post)}>Like</button>
+    }
+      
+  }
+
   render () {
     const { post, index } = this.props
     return (
@@ -60,7 +82,7 @@ class Post extends React.Component {
           </div>
         </div>
         <div className="card-footer d-flex justify-content-between">
-          <button className="btn btn-primary" onClick={ ()=>this.handleLike(post)}>Like</button>
+          {this.likeSection()}
           <button className="btn btn-primary">Comment</button>
         </div>
       </div>
