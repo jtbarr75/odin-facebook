@@ -17,7 +17,6 @@ gem 'uglifier', '>= 1.3.0'
 # gem 'mini_racer', platforms: :ruby
 gem 'webpacker'
 
-gem 'bootstrap', '~> 5.0.0.alpha1'
 gem 'sassc-rails', '>= 2.1.0'
 gem 'jquery-rails'
 

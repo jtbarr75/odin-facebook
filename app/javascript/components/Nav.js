@@ -30,73 +30,53 @@ class Nav extends React.Component {
 
     if (currentUser.notifications.length > 0) {
       notifications = currentUser.notifications.map(notification => {
-        <li className={notification.unread ? "bg-light-grey" : ""}>
-          <a href="#" id={`notification-${notification.id}`}>{notification.message}</a>
-        </li>
+          <a href="#" className="dropdown-item" id={`notification-${notification.id}`}>{notification.message}</a>
       })
     } else {
-      notifications = <li>Nothing new...</li>
+      notifications = <a href="#" className="dropdown-item">Nothing new...</a>
     }
 
-    const navSection = 
-      <Fragment>
-        <li className="dropdown">
-          <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-            Notifications 
-            <span className="badge">
-              {currentUser.notifications.length}
-            </span> <span className="caret"></span>
-          </a>
-          <ul className="dropdown-menu scrollable-menu" role="menu">
-            {notifications}
-          </ul>
-        </li>
-        <li className="dropdown">
-          <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-            {currentUser.name} <span className="caret"></span>
-          </a>
-          <ul className="dropdown-menu">
-            <li><a href="#">Your Profile</a></li>
-            <li><a href="#">Edit Profile</a></li>
-            <li role="separator" className="divider"></li>
-            <li ><button onClick={this.handleLogout}>Sign Out</button></li>
-          </ul>
-        </li>
-      </Fragment>
-
     return (
-      <Fragment>
-        <nav className="navbar navbar-default">
-          <div className="container-fluid">
-            {/* <!-- Brand and toggle get grouped for better mobile display --> */}
-            <div className="navbar-header">
-              <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span className="sr-only">Toggle navigation</span>
-                <span className="icon-bar"></span>
-                <span className="icon-bar"></span>
-                <span className="icon-bar"></span>
-              </button>
-              <a href="/" className="navbar-brand">Home</a>
-            </div>
+      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <a className="navbar-brand" href="#">FriendPost</a>
+        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span className="navbar-toggler-icon"></span>
+        </button>
 
-            {/* <!-- Collect the nav links, forms, and other content for toggling --> */}
-            <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <ul className="nav navbar-nav">
-                <li><a href="/users">Users</a></li>
-              </ul>
-              <form className="navbar-form navbar-left">
-                <div className="form-group">
-                  <input type="text" className="form-control" placeholder="Search"/>
-                </div>
-                <button type="submit" className="btn btn-default">Submit</button>
-              </form>
-              <ul className="nav navbar-nav navbar-right">
-                {navSection}
-              </ul>
-            </div>
-          </div>
-        </nav>
-      </Fragment>
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="navbar-nav mr-auto">
+            <li className="nav-item active">
+              <a className="nav-link" href="#">Home <span className="sr-only">(current)</span></a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="#">Users</a>
+            </li>
+            <li className="nav-item dropdown">
+              <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {currentUser.name}
+              </a>
+              <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a className="dropdown-item" href="#">Your Profile</a>
+                <a className="dropdown-item" href="#">Edit Profile</a>
+                <div className="dropdown-divider"></div>
+                <a className="dropdown-item" onClick={this.handleLogout}>Sign Out</a>
+              </div>
+            </li>
+            <li className="nav-item dropdown">
+              <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Notifications <span className="badge"> {currentUser.notifications.length} </span> <span className="caret"></span>
+              </a>
+              <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                {notifications}
+              </div>
+            </li>
+          </ul>
+          <form className="form-inline" action="/action_page.php">
+            <input className="form-control mr-sm-2" type="text" placeholder="Search"/>
+            <button className="btn btn-success" type="submit">Search</button>
+          </form>
+        </div>
+      </nav>
     );
   }
 }
