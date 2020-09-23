@@ -26,7 +26,7 @@ class Post extends React.Component {
       <div className="card mt-4">
         <div className="card-body">
           <div className="d-flex justify-content-between">
-            <h5 className="card-title"><a href={`users/${post.user.id}`}>{post.user.name}</a></h5>
+            <h5 className="card-title"><a href={`/users/${post.user.id}`}>{post.user.name}</a></h5>
             {this.props.currentUser.id == post.user.id && (
               <div className="dropdown">
               <button className="btn btn-secondary dropdown-toggle" type="button" id={`postDropDown${post.id}`} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
