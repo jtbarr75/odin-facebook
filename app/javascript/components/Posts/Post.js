@@ -1,5 +1,6 @@
 import React from "react"
 import axios from 'axios'
+import Comments from '../Comments/Comments'
 
 class Post extends React.Component {
   constructor(props) {
@@ -53,7 +54,7 @@ class Post extends React.Component {
   }
 
   render () {
-    const { post, index } = this.props
+    const { post, index, currentUser } = this.props
     return (
       <div className="card mt-4">
         <div className="card-body">
@@ -78,11 +79,16 @@ class Post extends React.Component {
             <p><small className="text-muted" >{post.likes.length} likes</small></p>
             <p><small className="text-muted" >{post.comments.length} comments</small></p>
           </div>
+          <hr/>
+          <div className="d-flex justify-content-between">
+            {this.likeSection()}
+            <button className="btn btn-primary">Comment</button>
+          </div>
         </div>
-        <div className="card-footer d-flex justify-content-between">
-          {this.likeSection()}
-          <button className="btn btn-primary">Comment</button>
-        </div>
+        <div className="card-body comments">
+            <hr/>
+            <Comments post={post} updatePost={this.props.updatePost}/>
+          </div>
       </div>
     )
   }
