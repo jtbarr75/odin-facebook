@@ -9,8 +9,7 @@ module Api
         @comment.user_id = current_user.id
         if @comment.save
           @comment.notify(@post.user, "#{current_user.name} commented on your post") #unless @post.user == current_user
-          flash[:success] = "Commented!"
-          render json: {success: "commented successfully", comment: @comment}, status: :ok
+          render json: {success: "commented successfully", post: @post.data}, status: :ok
         else
           render json: {error: "couldnt comment"}, status: :unprocessable_entity
         end

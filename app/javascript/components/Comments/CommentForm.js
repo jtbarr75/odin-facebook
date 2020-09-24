@@ -10,7 +10,7 @@ class CommentForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const body = document.getElementById('commentBody')
+    const body = document.getElementById(`commentBody${this.props.post.id}`)
     const token = document.querySelector('[name=csrf-token]').content
     axios.defaults.headers.common['X-CSRF-TOKEN'] = token
 
@@ -21,8 +21,8 @@ class CommentForm extends React.Component {
     }
     axios.post(`/api/v1/posts/${this.props.post.id}/comments`, commentInfo)
     .then((response) => {
-      console.log(response)
-      // window.flash_messages.addMessage({ id: `newComment${response.data.id}`, text: 'Posted!', type: 'success' });
+      this.props.updatePost(response.data.post)
+      window.flash_messages.addMessage({ id: `newComment${response.data.post.id}`, text: 'Commented!', type: 'success' });
       body.value = ""
     })
     .catch((err) => {console.log(err)})
@@ -31,7 +31,7 @@ class CommentForm extends React.Component {
   render () {
     return (
       <form className="form-inline justify-content-center">
-        <input type="textarea" id="commentBody" className="form-control" placeholder="Write a comment..."/>
+        <input type="textarea" id={`commentBody${this.props.post.id}`} className="form-control" placeholder="Write a comment..."/>
         <button type="submit" onClick={this.handleSubmit} className="btn btn-primary">Submit</button>
       </form>
     )

@@ -86,9 +86,9 @@ class Post extends React.Component {
           </div>
         </div>
         <div className="card-body comments">
-            <hr/>
-            <Comments post={post} updatePost={this.props.updatePost}/>
-          </div>
+          <hr/>
+          <Comments post={post} updatePost={this.props.updatePost}/>
+        </div>
       </div>
     )
   }

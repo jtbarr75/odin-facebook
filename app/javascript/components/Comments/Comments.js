@@ -1,5 +1,6 @@
-import React from "react"
+import React, { Fragment } from "react"
 import CommentForm from './CommentForm'
+import Comment from './Comment'
 
 class Comments extends React.Component {
   constructor(props) {
@@ -9,9 +10,17 @@ class Comments extends React.Component {
 
 
   render () {
-    const { post, updatePosts } = this.props
+    const { post, updatePost } = this.props
+    // console.log(post.comments)
+    let comments = post.comments.map((comment, index) => {
+      return <Comment key={index} comment={comment}/>
+    })
     return (
-      <CommentForm post={post} updatePosts={updatePosts}/>
+      <Fragment>
+        <CommentForm post={post} updatePost={updatePost}/>
+        {comments}
+      </Fragment>
+      
     )
   }
 }

@@ -29,8 +29,8 @@ class Nav extends React.Component {
     }
     let notifications;
     if (currentUser.notifications.length > 0) {
-      notifications = currentUser.notifications.map(notification => {
-          return (<a href="#" className="dropdown-item" id={`notification-${notification.id}`}>{notification.message}</a>)
+      notifications = currentUser.notifications.map((notification, index) => {
+          return (<a href="#" key={index} className="dropdown-item" id={`notification-${notification.id}`}>{notification.message}</a>)
       })
     } else {
       notifications = <a href="#" className="dropdown-item">Nothing new...</a>
