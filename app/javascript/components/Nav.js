@@ -21,6 +21,18 @@ class Nav extends React.Component {
     })
   }
 
+  handleNotificationClick(event, notification) {
+    const token = document.querySelector('[name=csrf-token]').content
+    axios.defaults.headers.common['X-CSRF-TOKEN'] = token
+
+    event.preventDefault()
+    axios.patch(`/api/v1/notifications/${notification.id}`)
+      .then((response) => {
+        window.location.href = `/posts/${response.data.id}`
+      })
+      .catch((err) => console.log(err))
+  }
+
   render () {
     const { currentUser } = this.state;
     if ( Object.keys(currentUser).length === 0) {
@@ -29,7 +41,11 @@ class Nav extends React.Component {
     let notifications;
     if (currentUser.notifications.length > 0) {
       notifications = currentUser.notifications.map((notification, index) => {
-          return (<a href="#" key={index} className="dropdown-item" id={`notification-${notification.id}`}>{notification.message}</a>)
+          return (
+          <a href={`/api/v1/notifications/${notification.id}`} key={index} className="dropdown-item" 
+            id={`notification-${notification.id}`} onClick={(event) => this.handleNotificationClick(event, notification)}>
+            {notification.message}
+          </a>)
       })
     } else {
       notifications = <a href="#" className="dropdown-item">Nothing new...</a>

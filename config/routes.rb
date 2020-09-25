@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:index, :show]
+  resources :posts, only: [:show]
   root 'welcome#app'
   get '/login', to: 'welcome#login'
   get '/signup', to: 'welcome#signup'

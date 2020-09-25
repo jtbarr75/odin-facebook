@@ -5,9 +5,7 @@ class Timeline extends React.Component {
   render() {
 
     return (
-      <div className="container">
-        <Posts currentUser={this.props.currentUser} hasPostForm="true"/>
-      </div>
+      <Posts currentUser={this.props.currentUser} hasPostForm="true"/>
     )
   }
 }

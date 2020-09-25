@@ -15,9 +15,7 @@ class Home extends React.Component {
   render() {
     const {currentUser} = this.state;
     return (
-      <div>
-        <Timeline currentUser={currentUser}/>
-      </div>
+      <Timeline currentUser={currentUser}/>
     )
   }
 }
