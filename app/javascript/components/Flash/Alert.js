@@ -27,7 +27,6 @@ class Alert extends React.Component {
   render() {
     const message = this.props.message;
     const alertClassName = `alert ${ this.alertClass(message.type) } `;
-    console.log(message)
  
     return(
       <div className={ alertClassName }>
