@@ -18,7 +18,8 @@ class Comment < ApplicationRecord
         id: self.user_id,
         name: self.user.name
       },
-      picture: self.picture
+      picture: self.picture,
+      likes: self.likes
     }
   end
 

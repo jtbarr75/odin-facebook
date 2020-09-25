@@ -22,6 +22,7 @@ class CommentForm extends React.Component {
     axios.post(`/api/v1/posts/${this.props.post.id}/comments`, commentInfo)
     .then((response) => {
       this.props.updatePost(response.data.post)
+      this.props.getComments()
       window.flash_messages.addMessage({ id: `newComment${response.data.post.id}`, text: 'Commented!', type: 'success' });
       body.value = ""
     })

@@ -24,10 +24,14 @@ class Post < ApplicationRecord
       body: self.body,
       picture: self.picture,
       createdAt: self.created_at_pst,
-      comments: self.comments.map{|comment| comment.data},
+      commentsCount: self.comments.count,
       likes: self.likes,
       user: self.user.post_data
     }
+  end
+
+  def comments_data
+    return self.comments.map{|comment| comment.data}
   end
 
   private

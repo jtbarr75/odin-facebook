@@ -2,6 +2,12 @@ module Api
   module V1
     class CommentsController < ApplicationController
       before_action :require_login
+
+      def index
+        @post = Post.find(params[:post_id])
+        @comments = @post.comments_data
+        render json: @comments, status: :ok
+      end
     
       def create
         @post = Post.find(params[:post_id])

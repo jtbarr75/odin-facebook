@@ -5,13 +5,23 @@ import Comments from '../Comments/Comments'
 class Post extends React.Component {
   constructor(props) {
     super(props)
+    this.state = {
+      comments: [],
+      commentsOpen: false
+    }
     this.handleDelete = this.handleDelete.bind(this)
+    this.toggleComments = this.toggleComments.bind(this)
+    this.getComments = this.getComments.bind(this)
+  }
+
+  setToken() {
+    const token = document.querySelector('[name=csrf-token]').content
+    axios.defaults.headers.common['X-CSRF-TOKEN'] = token
   }
 
   handleDelete(event) {
     event.preventDefault()
-    const token = document.querySelector('[name=csrf-token]').content
-    axios.defaults.headers.common['X-CSRF-TOKEN'] = token
+    this.setToken();
 
     axios.delete(`/api/v1/posts/${event.target.dataset.id}`)
     .then((response) => {
@@ -21,8 +31,7 @@ class Post extends React.Component {
   }
 
   handleLike(post) {
-    const token = document.querySelector('[name=csrf-token]').content
-    axios.defaults.headers.common['X-CSRF-TOKEN'] = token
+    this.setToken();
     const url = `/api/v1/posts/${post.id}/likes`
     axios.post(url)
     .then((response) => {
@@ -32,8 +41,7 @@ class Post extends React.Component {
   }
 
   handleUnlike(like) {
-    const token = document.querySelector('[name=csrf-token]').content
-    axios.defaults.headers.common['X-CSRF-TOKEN'] = token
+    this.setToken();
     const url = `/api/v1/likes/${like.id}`
     axios.delete(url)
     .then((response) => {
@@ -50,7 +58,52 @@ class Post extends React.Component {
     } else {
       return <button className="btn btn-primary" onClick={ ()=>this.handleLike(post)}>Like</button>
     }
-      
+  }
+
+  toggleComments() {
+    if (this.state.commentsOpen) {
+      this.setState({
+        commentsOpen: false
+      })
+    } else {
+      if (this.state.comments.length !== 0) {
+        this.setState({
+          commentsOpen: true
+        })
+      } else {
+        this.getComments()
+      }
+    }
+  }
+
+  getComments() {
+    this.setToken();
+    const url = `/api/v1/posts/${this.props.post.id}/comments`
+    axios.get(url)
+    .then((response) => {
+      this.setState({
+        comments: response.data,
+        commentsOpen: true
+      })
+    })
+    .catch((err) => {console.log(err)})
+  }
+
+  commentSection() {
+    if (this.state.commentsOpen) {
+      return (
+        <div className="card-body comments pt-0">
+          <hr/>
+          <Comments 
+            post={this.props.post} 
+            updatePost={this.props.updatePost} 
+            comments={this.state.comments}
+            getComments={this.getComments}
+          />
+        </div>
+      )
+    }
+    return null
   }
 
   render () {
@@ -77,18 +130,15 @@ class Post extends React.Component {
           { post.picture.url && <img className= "card-img" src={post.picture.url}/> }
           <div className="d-flex justify-content-between">
             <p><small className="text-muted" >{post.likes.length} likes</small></p>
-            <p><small className="text-muted" >{post.comments.length} comments</small></p>
+            <a><small className="text-muted" onClick={this.toggleComments}>{post.commentsCount} comments</small></a>
           </div>
           <hr/>
           <div className="d-flex justify-content-between">
             {this.likeSection()}
-            <button className="btn btn-primary">Comment</button>
+            <button className="btn btn-primary" onClick={this.toggleComments}>Comment</button>
           </div>
         </div>
-        <div className="card-body comments">
-          <hr/>
-          <Comments post={post} updatePost={this.props.updatePost}/>
-        </div>
+        {this.commentSection()}
       </div>
     )
   }
