@@ -10,7 +10,19 @@ class Comment < ApplicationRecord
 
   scope :desc, -> { order("created_at DESC") }
 
+  def data
+    return {
+      body: self.body,
+      created_at: created_at_pst,
+      user: {
+        id: self.user_id,
+        name: self.user.name
+      },
+      picture: self.picture
+    }
+  end
+
   def created_at_pst
-    self.created_at.in_time_zone("Pacific Time (US & Canada)")
+    self.created_at.in_time_zone("Pacific Time (US & Canada)").strftime("%b %e, %Y %l:%M %p")
   end
 end

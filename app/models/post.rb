@@ -24,7 +24,7 @@ class Post < ApplicationRecord
       body: self.body,
       picture: self.picture,
       createdAt: self.created_at_pst,
-      comments: self.comments,
+      comments: self.comments.map{|comment| comment.data},
       likes: self.likes,
       user: self.user.post_data
     }
