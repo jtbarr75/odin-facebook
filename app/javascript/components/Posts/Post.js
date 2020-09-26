@@ -7,11 +7,13 @@ class Post extends React.Component {
     super(props)
     this.state = {
       comments: [],
-      commentsOpen: false
+      commentsOpen: false,
+      post: this.props.post
     }
     this.handleDelete = this.handleDelete.bind(this)
     this.toggleComments = this.toggleComments.bind(this)
     this.getComments = this.getComments.bind(this)
+    this.updatePost = this.updatePost.bind(this)
   }
 
   setToken() {
@@ -35,7 +37,7 @@ class Post extends React.Component {
     const url = `/api/v1/posts/${post.id}/likes`
     axios.post(url)
     .then((response) => {
-      this.props.updatePost(response.data.likable)
+      this.updatePost(response.data.likable)
     })
     .catch((err) => {console.log(err)})
   }
@@ -45,14 +47,14 @@ class Post extends React.Component {
     const url = `/api/v1/likes/${like.id}`
     axios.delete(url)
     .then((response) => {
-      this.props.updatePost(response.data.likable)
+      this.updatePost(response.data.likable)
     })
     .catch((err) => {console.log(err)})
   }
 
   likeSection() {
-    const { post, currentUser } = this.props
-    let like = post.likes.find(like => like.user_id == currentUser.id)
+    const { post } = this.state
+    let like = post.likes.find(like => like.user_id == this.props.currentUser.id)
     if (like) {
       return <button className="btn btn-primary" onClick={ ()=>this.handleUnlike(like)}>Unlike</button>
     } else {
@@ -95,8 +97,8 @@ class Post extends React.Component {
         <div className="card-body comments pt-0">
           <hr/>
           <Comments 
-            post={this.props.post} 
-            updatePost={this.props.updatePost} 
+            post={this.state.post} 
+            updatePost={this.updatePost} 
             comments={this.state.comments}
             getComments={this.getComments}
           />
@@ -106,8 +108,17 @@ class Post extends React.Component {
     return null
   }
 
+  updatePost(post) {
+    if (this.props.updatePost){
+      this.props.updatePost(post)
+    } 
+    this.setState({
+      post: post
+    })
+  }
+
   render () {
-    const { post, index, currentUser } = this.props
+    const { post } = this.state
     return (
       <div className="card mt-4">
         <div className="card-body">
