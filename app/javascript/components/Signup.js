@@ -30,57 +30,37 @@ class Signup extends React.Component {
 
   render() {
     return (
-      <Fragment>
-        <div className="col-sm-offset-4 col-sm-8">
-          <h2>Sign up</h2>
-        </div>
-        <div className="row">
-          <div className="col-xs-offset-3 col-xs-9">
-            <form className='form-horizontal'>
+      <div className="row justify-content-center">
+      <div className="col-5">
+        <div className="card mt-4 bg-light">
+          <div className="card-body">
+            <h2>Sign Up</h2>
+            <form>
               <div className="form-group">
-                <div className="control-label col-sm-2">
-                  <label>Name</label>
-                </div>
-                <div className="col-sm-6">
-                  <input type="text" name="name" id="name"/>
-                </div>
+                <label>Name</label><br/>
+                <input id="name" class="form-control" type="text" name="name" />
               </div>
               <div className="form-group">
-                <div className="control-label col-sm-2">
-                  <label>Email</label>
-                </div>
-                <div className="col-sm-6">
-                  <input type="email" name="email" id="email"/>
-                </div>
+                <label>Email</label><br/>
+                <input id="email" class="form-control" type="email" name="email" />
               </div>
               <div className="form-group">
-                <div className="control-label col-sm-2">
-                  <label>Password</label>
-                </div>
-                <div className="col-sm-6">
-                  <input type="password" name="password" id="password"/>
-                </div>
+                <label>Password</label><br/>
+                <input id="password" class="form-control" type="password" name="password" />
               </div>
               <div className="form-group">
-                <div className="control-label col-sm-2">
-                  <label>Password Confirmation</label>
-                </div>
-                <div className="col-sm-6">
-                  <input type="password" name="passwordConfirmation" id="passwordConfirmation"/>
-                </div>
+                <label>Password Confirmation</label><br/>
+                <input id="passwordConfirmation" class="form-control" type="password" name="password" />
               </div>
               <div className="form-group">
-                <div className="col-sm-offset-2 col-sm-10">
-                  <button className="btn btn-primary btn-large" onClick={this.handleSignup}>Sign Up</button>
-                </div>
+                <button className="btn btn-primary btn-large" onClick={this.handleSignup}>Sign Up</button>
               </div>
             </form>
-            <div className="col-sm-offset-2 col-sm-10">
-              <a href="/login" className="btn btn-primary btn-large">Log In</a>
-            </div> 
+            <a href="/login" >Log in</a>
           </div>
         </div>
-      </Fragment>
+      </div>
+    </div>
     )
   }
 }

@@ -28,29 +28,29 @@ class Login extends React.Component {
 
   render() {
     return (
-      <Fragment>
-        <div className="col-sm-offset-5 col-xs-7">
-            <h2>Log In</h2>
-          </div>
-        <div className="row">
-          <div className="col-xs-offset-5 col-xs-7">
-            <form>
-              <div className="form-group">
-                <label>Email</label><br/>
-                <input id="email" type="email" name="email" />
-              </div>
-              <div className="form-group">
-                <label>Password</label><br/>
-                <input id="password" type="password" name="password" />
-              </div>
-              <div className="form-group">
-                <button className="btn btn-primary btn-large" onClick={this.handleLogin}>Log In</button>
-              </div>
-            </form>
-            <a href="/signup" className="btn btn-primary btn-large" >Sign Up!</a>
+      <div className="row justify-content-center">
+        <div className="col-5">
+          <div className="card mt-4 bg-light">
+            <div className="card-body">
+              <h2>Log In</h2>
+              <form>
+                <div className="form-group">
+                  <label>Email</label><br/>
+                  <input id="email" class="form-control" type="email" name="email" />
+                </div>
+                <div className="form-group">
+                  <label>Password</label><br/>
+                  <input id="password" class="form-control" type="password" name="password" />
+                </div>
+                <div className="form-group">
+                  <button className="btn btn-primary btn-large" onClick={this.handleLogin}>Log In</button>
+                </div>
+              </form>
+              <a href="/signup" >Sign Up!</a>
+            </div>
           </div>
         </div>
-      </Fragment>
+      </div>
     )
   }
 }
