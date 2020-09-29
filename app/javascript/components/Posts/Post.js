@@ -13,6 +13,8 @@ class Post extends React.Component {
     this.handleDelete = this.handleDelete.bind(this)
     this.toggleComments = this.toggleComments.bind(this)
     this.getComments = this.getComments.bind(this)
+    this.removeComment = this.removeComment.bind(this)
+    this.updateComments = this.updateComments.bind(this)
     this.updatePost = this.updatePost.bind(this)
     this.editPost = this.editPost.bind(this)
     this.handleEdit = this.handleEdit.bind(this)
@@ -93,6 +95,17 @@ class Post extends React.Component {
     .catch((err) => {console.log(err)})
   }
 
+  updateComments(comment) {
+    let comments = [...this.state.comments];
+    comments = comments.map(c => c.id == comment.id ? comment : c)
+    this.setState({comments: comments});
+  }
+
+  removeComment(comment) {
+    let commentsCopy = [...this.state.comments].filter(c => c.id != comment.id);
+    this.setState({comments: commentsCopy});
+  }
+
   commentSection() {
     if (this.state.commentsOpen) {
       return (
@@ -103,6 +116,9 @@ class Post extends React.Component {
             updatePost={this.updatePost} 
             comments={this.state.comments}
             getComments={this.getComments}
+            currentUser={this.props.currentUser}
+            removeComment={this.removeComment}
+            updateComments={this.updateComments}
           />
         </div>
       )

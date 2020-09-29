@@ -10,10 +10,15 @@ class Comments extends React.Component {
 
 
   render () {
-    const { post, updatePost, comments, getComments } = this.props
+    const { post, updatePost, comments, getComments, currentUser } = this.props
     // console.log(post.comments)
     const commentsList = comments.map((comment, index) => {
-      return <Comment key={index} comment={comment}/>
+      return <Comment key={index} 
+                comment={comment} 
+                currentUser={currentUser}
+                removeComment={this.props.removeComment}
+                updateComments={this.props.updateComments}
+              />
     })
     return (
       <Fragment>

@@ -23,9 +23,11 @@ module Api
     
       def destroy
         @comment = Comment.find(params[:id])
-        @comment.destroy
-        flash[:success] = "Comment Deleted"
-        redirect_back(fallback_location: root_url)
+        if @comment.destroy
+          render json: { message: "deleted comment", comment: @comment }, status: :ok
+        else
+          render json: { message: "failed to delete comment"}, status: 422
+        end
       end
     
       def show
