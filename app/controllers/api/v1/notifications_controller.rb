@@ -9,12 +9,12 @@ module Api
         
         if @notification.notifiable_type == "Like"
           if @parent.likable_type == "Post"
-            render json: @parent.likable, status: :ok
+            render json: { parent: @parent.likable, notification: @notification}, status: :ok
           elsif @parent.likable_type == "Comment"
-            render json: @parent.likable.post, status: :ok
+            render json: { parent: @parent.likable.post, notification: @notification}, status: :ok
           end
         elsif @notification.notifiable_type == "Comment"
-          render json: @notification.notifiable.post, status: :ok
+          render json: { parent: @notification.notifiable.post, notification: @notification}, status: :ok
         end
       end
     end

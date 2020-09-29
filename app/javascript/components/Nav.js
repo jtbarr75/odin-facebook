@@ -28,9 +28,48 @@ class Nav extends React.Component {
     event.preventDefault()
     axios.patch(`/api/v1/notifications/${notification.id}`)
       .then((response) => {
-        window.location.href = `/posts/${response.data.id}`
+        window.location.href = `/posts/${response.data.parent.id}`
+        this.updateNotifications(response.data.notification)
       })
       .catch((err) => console.log(err))
+  }
+
+  updateNotifications(notification) {
+    let notificationsCopy = [...this.state.currentUser.notifications]
+    notificationsCopy = notificationsCopy.map(notif => notif.id == notification.id ? notification : notif)
+    this.setState({
+      currentUser: {
+        ...this.state.currentUser,
+        notifications: notificationsCopy
+      }
+    })
+  }
+
+  notificationSection() {
+    const { currentUser } = this.props
+    let notifications;
+    if (currentUser.notifications.length > 0) {
+      notifications = currentUser.notifications.map((notification, index) => {
+          return (
+          <a 
+            href={`/api/v1/notifications/${notification.id}`} 
+            key={index} 
+            className={notification.unread ? "dropdown-item bg-primary text-white" : "dropdown-item"}
+            id={`notification-${notification.id}`} 
+            onClick={(event) => this.handleNotificationClick(event, notification)}
+          >
+            {notification.message}
+          </a>)
+      })
+    } else {
+      notifications = <a href="#" className="dropdown-item">Nothing new...</a>
+    }
+    return notifications
+  }
+
+  unreadNotifications(){
+    const notifications = [...this.props.currentUser.notifications]
+    return notifications.filter(n => n.unread == true).length
   }
 
   render () {
@@ -38,19 +77,6 @@ class Nav extends React.Component {
     if ( Object.keys(currentUser).length === 0) {
       return null;
     }
-    let notifications;
-    if (currentUser.notifications.length > 0) {
-      notifications = currentUser.notifications.map((notification, index) => {
-          return (
-          <a href={`/api/v1/notifications/${notification.id}`} key={index} className="dropdown-item" 
-            id={`notification-${notification.id}`} onClick={(event) => this.handleNotificationClick(event, notification)}>
-            {notification.message}
-          </a>)
-      })
-    } else {
-      notifications = <a href="#" className="dropdown-item">Nothing new...</a>
-    }
-
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <a className="navbar-brand" href="/">FriendPost</a>
@@ -71,10 +97,10 @@ class Nav extends React.Component {
           <ul className="navbar-nav ml-auto">
           <li className="nav-item dropdown">
               <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Notifications <span className="badge badge-primary"> {currentUser.notifications.length} </span>
+                Notifications <span className="badge badge-primary"> {this.unreadNotifications()} </span>
               </a>
               <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                {notifications}
+                {this.notificationSection()}
               </div>
             </li>
             <li className="nav-item dropdown">
