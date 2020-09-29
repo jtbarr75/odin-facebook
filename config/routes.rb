@@ -8,7 +8,7 @@ Rails.application.routes.draw do
         resources :friendships, only: [:index, :create, :update, :destroy]
       end
     
-      resources :posts, only: [:index, :show, :destroy] do 
+      resources :posts, only: [:index, :show, :destroy, :update] do 
         resources :comments, only: [:create, :index]
         resources :likes, only: [:create]
       end

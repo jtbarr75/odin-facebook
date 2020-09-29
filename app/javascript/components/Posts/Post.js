@@ -14,6 +14,8 @@ class Post extends React.Component {
     this.toggleComments = this.toggleComments.bind(this)
     this.getComments = this.getComments.bind(this)
     this.updatePost = this.updatePost.bind(this)
+    this.editPost = this.editPost.bind(this)
+    this.handleEdit = this.handleEdit.bind(this)
   }
 
   setToken() {
@@ -117,6 +119,38 @@ class Post extends React.Component {
     })
   }
 
+  editPost() {
+    let body = document.getElementById(`postBody${this.props.post.id}`);
+    body.style.display = "none"
+    let input = document.createElement("textarea");
+    input.value = body.textContent
+    input.id = "postEdit"
+    input.rows = 3
+    body.parentElement.insertBefore(input, body)
+    input.onkeypress =  this.handleEdit
+  }
+
+  handleEdit(event) {
+    if (event.keyCode == 13) {
+      this.setToken();
+      const body = document.getElementById('postEdit').value
+      const url = `/api/v1/posts/${this.props.post.id}`
+      axios.patch(url, { body: body })
+      .then((response) => {
+        this.removeEditInput()
+        this.updatePost(response.data.post)
+      })
+      .catch((err) => {console.log(err.response)})
+    }
+  }
+
+  removeEditInput() {
+    const input = document.getElementById('postEdit')
+    const body = document.getElementById(`postBody${this.props.post.id}`)
+    body.style.display = "block"
+    input.parentElement.removeChild(input)
+  }
+
   render () {
     let { post } = this.state
     // if post is handled through state in Posts component, use props instead of state
@@ -135,14 +169,14 @@ class Post extends React.Component {
                 Actions<span className="caret"></span>
               </button>
               <div className="dropdown-menu" aria-labelledby={`postDropDown${post.id}`}>
-                <button className="dropdown-item" href="#">Edit Post</button>
+                <button className="dropdown-item" onClick={this.editPost}>Edit Post</button>
                 <button className="dropdown-item" onClick={this.handleDelete} data-id={post.id}>Delete Post</button>
               </div>
             </div>
             )}
           </div>
           <p className="card-text"><small className="text-muted">{post.createdAt}</small></p>
-          <p className="card-text">{post.body}</p>
+          <p className="card-text" id={`postBody${post.id}`}>{post.body}</p>
           { post.picture.url && <img className= "card-img" src={post.picture.url}/> }
           <div className="d-flex justify-content-between">
             <p><small className="text-muted" >{post.likes.length} likes</small></p>
