@@ -118,7 +118,12 @@ class Post extends React.Component {
   }
 
   render () {
-    const { post } = this.state
+    let { post } = this.state
+    // if post is handled through state in Posts component, use props instead of state
+    if (this.props.updatePost) {
+      post = this.props.post
+    }
+    
     return (
       <div className="card mt-4">
         <div className="card-body">
