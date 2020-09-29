@@ -99,7 +99,7 @@ class Nav extends React.Component {
               <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Notifications <span className="badge badge-primary"> {this.unreadNotifications()} </span>
               </a>
-              <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+              <div className="dropdown-menu dropdown-menu-right notifications" aria-labelledby="navbarDropdown">
                 {this.notificationSection()}
               </div>
             </li>
