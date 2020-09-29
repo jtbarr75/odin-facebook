@@ -29,6 +29,15 @@ module Api
           render json: { message: "failed to delete comment"}, status: 422
         end
       end
+
+      def update
+        @comment = Comment.find(params[:id])
+        if @comment.update(body: params[:body])
+          render json: { message: "edited comment", comment: @comment.data }, status: :ok
+        else
+          render json: { message: "failed to edit comment"}, status: 422
+        end
+      end
     
       def show
         @comment = Comment.find(params[:id])

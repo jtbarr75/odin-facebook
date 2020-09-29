@@ -5,8 +5,9 @@ class Comment extends React.Component {
   constructor(props) {
     super(props)
     this.handleDelete = this.handleDelete.bind(this)
-    // this.editPost = this.editPost.bind(this)
-    // this.handleEdit = this.handleEdit.bind(this)
+    this.editComment = this.editComment.bind(this)
+    this.handleEdit = this.handleEdit.bind(this)
+    this.removeEditInput = this.removeEditInput.bind(this)
   }
 
   setToken() {
@@ -25,6 +26,38 @@ class Comment extends React.Component {
     .catch((err) => {console.log(err)})
   }
 
+  editComment() {
+    let body = document.getElementById(`commentBody${this.props.comment.id}`);
+    body.style.display = "none"
+    let input = document.createElement("textarea");
+    input.value = body.textContent
+    input.id = "commentEdit"
+    input.rows = 3
+    body.parentElement.insertBefore(input, body)
+    input.onkeypress =  this.handleEdit
+  }
+
+  handleEdit(event) {
+    if (event.keyCode == 13) {
+      this.setToken();
+      const body = document.getElementById('commentEdit').value
+      const url = `/api/v1/comments/${this.props.comment.id}`
+      axios.patch(url, { body: body })
+      .then((response) => {
+        this.removeEditInput()
+        this.props.updateComments(response.data.comment)
+      })
+      .catch((err) => {console.log(err)})
+    }
+  }
+
+  removeEditInput() {
+    const input = document.getElementById('commentEdit')
+    const body = document.getElementById(`commentBody${this.props.comment.id}`)
+    body.style.display = "block"
+    input.parentElement.removeChild(input)
+  }
+
   render () {
     const { comment } = this.props
     return (
@@ -41,14 +74,14 @@ class Comment extends React.Component {
                 Actions<span className="caret"></span>
               </button>
               <div className="dropdown-menu" aria-labelledby={`commentDropDown${comment.id}`}>
-                <button className="dropdown-item" onClick={this.editPost}>Edit Comment</button>
+                <button className="dropdown-item" onClick={this.editComment}>Edit Comment</button>
                 <button className="dropdown-item" onClick={this.handleDelete} data-id={comment.id}>Delete Comment</button>
               </div>
             </div>
             )}
           </div>
           
-          <p className="card-text">{comment.body}</p>
+          <p className="card-text" id={`commentBody${this.props.comment.id}`}>{comment.body}</p>
         </div>
       </div>
     )
