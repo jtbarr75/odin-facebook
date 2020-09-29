@@ -141,7 +141,7 @@ class Post extends React.Component {
           { post.picture.url && <img className= "card-img" src={post.picture.url}/> }
           <div className="d-flex justify-content-between">
             <p><small className="text-muted" >{post.likes.length} likes</small></p>
-            <a><small className="text-muted" onClick={this.toggleComments}>{post.commentsCount} comments</small></a>
+            <a><small className="text-muted" onClick={this.toggleComments}>{post.comments.length} comments</small></a>
           </div>
           <hr/>
           <div className="d-flex justify-content-between">

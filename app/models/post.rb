@@ -24,7 +24,7 @@ class Post < ApplicationRecord
       body: self.body,
       picture: self.picture,
       createdAt: self.created_at_pst,
-      commentsCount: self.comments.count,
+      comments: self.comments,
       likes: self.likes,
       user: self.user.post_data
     }
