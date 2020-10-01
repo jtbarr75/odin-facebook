@@ -1,6 +1,7 @@
 import React from "react"
 import axios from 'axios'
 import Comments from '../Comments/Comments'
+import PropTypes from 'prop-types'
 
 class Post extends React.Component {
   constructor(props) {
@@ -215,5 +216,12 @@ class Post extends React.Component {
     )
   }
 }
+
+Post.propTypes = {
+  removePost: PropTypes.func,
+  updatePost: PropTypes.func,
+  currentUser: PropTypes.object.isRequired,
+  post: PropTypes.object.isRequired
+};
 
 export default Post

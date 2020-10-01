@@ -20,7 +20,7 @@ class Comments extends React.Component {
     })
     return (
       <Fragment>
-        <CommentForm post={post} updatePost={updatePost} getComments={getComments}/>
+        <CommentForm post={post} updatePost={updatePost} updateComments={updateComments}/>
         {commentsList}
       </Fragment>
       

@@ -21,7 +21,6 @@ class Comment extends React.Component {
 
     axios.delete(`/api/v1/comments/${this.props.comment.id}`)
     .then((response) => {
-      console.log(response.data)
       this.props.updateComments(response.data.comments)
       this.props.updatePost(response.data.post)
     })

@@ -13,6 +13,7 @@ class Posts extends React.Component {
     this.addPost = this.addPost.bind(this)
     this.removePost = this.removePost.bind(this)
     this.updatePost = this.updatePost.bind(this)
+    this.postsList = this.postsList.bind(this)
   }
 
   componentDidMount() {
@@ -44,27 +45,37 @@ class Posts extends React.Component {
   }
 
   updatePost(post) {
-    console.log(post)
     let posts = [...this.state.posts];
     posts = posts.map(p => p.id == post.id ? post : p)
     this.setState({posts: posts});
   }
 
-  render () {
+  postsList() {
     const { posts } = this.state;
     let postsList;
     if (posts) {
       postsList = posts.map((post, index) => {
         return (
-          <Post key={index} post={post} currentUser={this.props.currentUser} removePost={this.removePost} updatePost={this.updatePost}/>
+          <Post
+            key={post.id} 
+            post={post} 
+            currentUser={this.props.currentUser} 
+            removePost={this.removePost} 
+            updatePost={this.updatePost}
+          />
         )
       })
     }
+    return postsList
+  }
+
+  render () {
+    
     return (
       <div className="row justify-content-center">
         <div className="col-8">
           {this.props.hasPostForm && <PostForm currentUser={this.props.currentUser} addPost = {this.addPost}/>}
-          {postsList} 
+          {this.postsList()} 
         </div>
       </div>
     )

@@ -14,8 +14,9 @@ module Api
         @comment = @post.comments.build(params.require(:comment).permit(:body, :picture))
         @comment.user_id = current_user.id
         if @comment.save
+          @comments = @post.comments_data
           @comment.notify(@post.user, "#{current_user.name} commented on your post") #unless @post.user == current_user
-          render json: {success: "commented successfully", post: @post.data}, status: :ok
+          render json: {success: "commented successfully", post: @post.data, comments: @comments}, status: :ok
         else
           render json: {error: "couldnt comment"}, status: :unprocessable_entity
         end
