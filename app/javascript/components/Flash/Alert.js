@@ -26,10 +26,10 @@ class Alert extends React.Component {
   
   render() {
     const message = this.props.message;
-    const alertClassName = `alert ${ this.alertClass(message.type) } `;
+    const alertClassName = `alert ${ this.alertClass(message.type) } m-0`;
  
     return(
-      <div className={ alertClassName }>
+      <div id={`alert-${message.id}`} className={ alertClassName }>
         <button className='close'
           onClick={ this.props.onClose }>
           &times;

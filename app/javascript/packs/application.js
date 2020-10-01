@@ -14,7 +14,7 @@ ReactRailsUJS.useContext(componentRequireContext);
 import 'jquery'
 import 'popper.js'
 import 'bootstrap'
-import '../../assets/stylesheets/application'
+import './stylesheets/application.scss'
 document.addEventListener("turbolinks:load", () => {
   $('[data-toggle="tooltip"]').tooltip()
   $('[data-toggle="popover"]').popover()

@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
-import { CSSTransitionGroup } from 'react-transition-group'
 import Alert from './Alert'
 
 class FlashMessages extends React.Component {
