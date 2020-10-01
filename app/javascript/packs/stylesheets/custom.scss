@@ -1,0 +1,28 @@
+// Notifications
+
+.notifications {
+  max-height: 400px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+// Flash
+
+.flash .alert:nth-child(1) {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.alert {
+  padding: 1rem 1rem;
+  text-align: center;
+  z-index: 10;
+}
+
+// Posts
+
+textarea#postEdit {
+  width: 100%;
+  resize: none;
+}
