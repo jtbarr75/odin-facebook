@@ -23,8 +23,10 @@ module Api
     
       def destroy
         @comment = Comment.find(params[:id])
+        @parent = @comment.post
         if @comment.destroy
-          render json: { message: "deleted comment", comment: @comment }, status: :ok
+          @comments = @parent.comments_data
+          render json: { message: "deleted comment", post: @parent.data, comments: @comments }, status: :ok
         else
           render json: { message: "failed to delete comment"}, status: 422
         end
@@ -32,8 +34,10 @@ module Api
 
       def update
         @comment = Comment.find(params[:id])
+        @parent = @comment.post
         if @comment.update(body: params[:body])
-          render json: { message: "edited comment", comment: @comment.data }, status: :ok
+          @comments = @parent.comments_data
+          render json: { message: "edited comment", post: @parent.data, comments: @comments }, status: :ok
         else
           render json: { message: "failed to edit comment"}, status: 422
         end

@@ -44,6 +44,7 @@ class Posts extends React.Component {
   }
 
   updatePost(post) {
+    console.log(post)
     let posts = [...this.state.posts];
     posts = posts.map(p => p.id == post.id ? post : p)
     this.setState({posts: posts});

@@ -21,7 +21,9 @@ class Comment extends React.Component {
 
     axios.delete(`/api/v1/comments/${this.props.comment.id}`)
     .then((response) => {
-      this.props.removeComment(response.data.comment)
+      console.log(response.data)
+      this.props.updateComments(response.data.comments)
+      this.props.updatePost(response.data.post)
     })
     .catch((err) => {console.log(err)})
   }
@@ -45,7 +47,7 @@ class Comment extends React.Component {
       axios.patch(url, { body: body })
       .then((response) => {
         this.removeEditInput()
-        this.props.updateComments(response.data.comment)
+        this.props.updateComments(response.data.comments)
       })
       .catch((err) => {console.log(err)})
     }

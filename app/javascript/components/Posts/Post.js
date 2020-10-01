@@ -6,18 +6,19 @@ class Post extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      comments: [],
       commentsOpen: false,
-      post: this.props.post
+      post: this.props.post,
+      fullComments: [],
     }
     this.handleDelete = this.handleDelete.bind(this)
     this.toggleComments = this.toggleComments.bind(this)
     this.getComments = this.getComments.bind(this)
-    this.removeComment = this.removeComment.bind(this)
-    this.updateComments = this.updateComments.bind(this)
     this.updatePost = this.updatePost.bind(this)
     this.editPost = this.editPost.bind(this)
     this.handleEdit = this.handleEdit.bind(this)
+    this.post = this.post.bind(this)
+    this.inTimeline = this.inTimeline.bind(this)
+    this.updateComments = this.updateComments.bind(this)
   }
 
   setToken() {
@@ -72,7 +73,8 @@ class Post extends React.Component {
         commentsOpen: false
       })
     } else {
-      if (this.state.comments.length !== 0) {
+      // If comments has been opened before and fetched comment user data, just open and don't fetch again
+      if (this.state.fullComments.length > 0) {
         this.setState({
           commentsOpen: true
         })
@@ -88,47 +90,21 @@ class Post extends React.Component {
     axios.get(url)
     .then((response) => {
       this.setState({
-        comments: response.data,
-        commentsOpen: true
+        commentsOpen: true,
+        fullComments: response.data,
       })
     })
     .catch((err) => {console.log(err)})
   }
 
-  updateComments(comment) {
-    let comments = [...this.state.comments];
-    comments = comments.map(c => c.id == comment.id ? comment : c)
-    this.setState({comments: comments});
-  }
-
-  removeComment(comment) {
-    let commentsCopy = [...this.state.comments].filter(c => c.id != comment.id);
-    this.setState({comments: commentsCopy});
-  }
-
-  commentSection() {
-    if (this.state.commentsOpen) {
-      let post = this.inTimeline() ? this.props.post : this.state.post
-      return (
-        <div className="card-body comments pt-0">
-          <hr/>
-          <Comments 
-            post={post} 
-            updatePost={this.updatePost} 
-            comments={this.state.comments}
-            getComments={this.getComments}
-            currentUser={this.props.currentUser}
-            removeComment={this.removeComment}
-            updateComments={this.updateComments}
-          />
-        </div>
-      )
-    }
-    return null
+  updateComments(comments) {
+    this.setState({
+      fullComments: comments
+    })
   }
 
   updatePost(post) {
-    if (this.props.updatePost){
+    if (this.inTimeline()){
       this.props.updatePost(post)
     } 
     this.setState({
@@ -176,12 +152,33 @@ class Post extends React.Component {
     return false
   }
 
-  render () {
-    let { post } = this.state
-    // if post is handled through state in Posts component, use props instead of state
-    if (this.inTimeline()) {
-      post = this.props.post
+  // if in Timeline then post is handled through state in timeline, else post stores own state
+  post() {
+    return this.inTimeline() ? this.props.post : this.state.post
+  }
+
+  commentSection() {
+    if (this.state.commentsOpen) {
+      let post = this.post()
+      return (
+        <div className="card-body comments pt-0">
+          <hr/>
+          <Comments 
+            post={post}
+            comments={this.state.fullComments}
+            updatePost={this.updatePost} 
+            getComments={this.getComments}
+            updateComments={this.updateComments}
+            currentUser={this.props.currentUser}
+          />
+        </div>
+      )
     }
+    return null
+  }
+
+  render () {
+    let post  = this.post()
     
     return (
       <div className="card mt-4">
