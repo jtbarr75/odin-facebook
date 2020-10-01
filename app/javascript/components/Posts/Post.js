@@ -33,6 +33,7 @@ class Post extends React.Component {
 
     axios.delete(`/api/v1/posts/${event.target.dataset.id}`)
     .then((response) => {
+      window.flash_messages.addMessage({ id: `deletePost${response.data.post.id}`, text: 'Deleted Post!', type: 'danger' });
       this.props.removePost(response.data.post)
     })
     .catch((err) => {console.log(err)})
@@ -131,6 +132,7 @@ class Post extends React.Component {
       const url = `/api/v1/posts/${this.props.post.id}`
       axios.patch(url, { body: body })
       .then((response) => {
+        window.flash_messages.addMessage({ id: `editPost${response.data.post.id}`, text: 'Edited Post!', type: 'warning' });
         this.removeEditInput()
         this.updatePost(response.data.post)
       })

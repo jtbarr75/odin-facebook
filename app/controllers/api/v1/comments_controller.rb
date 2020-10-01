@@ -27,7 +27,7 @@ module Api
         @parent = @comment.post
         if @comment.destroy
           @comments = @parent.comments_data
-          render json: { message: "deleted comment", post: @parent.data, comments: @comments }, status: :ok
+          render json: { message: "deleted comment", post: @parent.data, comments: @comments, comment: @comment }, status: :ok
         else
           render json: { message: "failed to delete comment"}, status: 422
         end
@@ -38,7 +38,7 @@ module Api
         @parent = @comment.post
         if @comment.update(body: params[:body])
           @comments = @parent.comments_data
-          render json: { message: "edited comment", post: @parent.data, comments: @comments }, status: :ok
+          render json: { message: "edited comment", post: @parent.data, comments: @comments, comment: @comment }, status: :ok
         else
           render json: { message: "failed to edit comment"}, status: 422
         end

@@ -16,9 +16,9 @@ class Alert extends React.Component {
   
   alertClass (type) {
     let classes = {
-      error: 'alert-danger',
-      alert: 'alert-warning',
-      notice: 'alert-info',
+      danger: 'alert-danger',
+      warning: 'alert-warning',
+      info: 'alert-info',
       success: 'alert-success'
     };
     return classes[type] || classes.success;

@@ -21,6 +21,7 @@ class Comment extends React.Component {
 
     axios.delete(`/api/v1/comments/${this.props.comment.id}`)
     .then((response) => {
+      window.flash_messages.addMessage({ id: `deleteComment${response.data.comment.id}`, text: 'Deleted Comment!', type: 'danger' });
       this.props.updateComments(response.data.comments)
       this.props.updatePost(response.data.post)
     })
@@ -45,6 +46,7 @@ class Comment extends React.Component {
       const url = `/api/v1/comments/${this.props.comment.id}`
       axios.patch(url, { body: body })
       .then((response) => {
+        window.flash_messages.addMessage({ id: `editComment${response.data.comment.id}`, text: 'Edited Comment!', type: 'warning' });
         this.removeEditInput()
         this.props.updateComments(response.data.comments)
       })
