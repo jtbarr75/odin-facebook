@@ -1,7 +1,7 @@
 module Api
   module V1
     class PostsController < ApplicationController
-      # before_action :require_login
+      before_action :require_login
     
       def index
         posts = current_user.timeline_posts
@@ -18,11 +18,10 @@ module Api
       end
     
       def create
-        @user = User.find(params[:user_id])
-        @post = @user.posts.build(post_params)
+        @post = current_user.posts.build(post_params)
         if @post.save
           flash[:success] = "Post Created"
-          render json: @post.data
+          render json: {post: @post.data, message: "successfully posted"}, status: :ok
         else
           render json: {}, status: 422
         end

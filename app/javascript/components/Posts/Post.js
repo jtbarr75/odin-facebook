@@ -108,11 +108,12 @@ class Post extends React.Component {
 
   commentSection() {
     if (this.state.commentsOpen) {
+      let post = this.inTimeline() ? this.props.post : this.state.post
       return (
         <div className="card-body comments pt-0">
           <hr/>
           <Comments 
-            post={this.state.post} 
+            post={post} 
             updatePost={this.updatePost} 
             comments={this.state.comments}
             getComments={this.getComments}
@@ -167,10 +168,18 @@ class Post extends React.Component {
     input.parentElement.removeChild(input)
   }
 
+  // If the update post method was passed in, it's in the timeline
+  inTimeline() {
+    if (this.props.updatePost) {
+      return true
+    }
+    return false
+  }
+
   render () {
     let { post } = this.state
     // if post is handled through state in Posts component, use props instead of state
-    if (this.props.updatePost) {
+    if (this.inTimeline()) {
       post = this.props.post
     }
     

@@ -4,11 +4,11 @@ Rails.application.routes.draw do
     namespace 'v1' do
     
       resources :users, only: [:index, :show] do
-        resources :posts, only: [:show, :create]
+        resources :posts, only: [:show]
         resources :friendships, only: [:index, :create, :update, :destroy]
       end
     
-      resources :posts, only: [:index, :show, :destroy, :update] do 
+      resources :posts, only: [:index, :show, :create, :destroy, :update] do 
         resources :comments, only: [:create, :index]
         resources :likes, only: [:create]
       end

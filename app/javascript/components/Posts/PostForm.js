@@ -19,9 +19,9 @@ class PostForm extends React.Component {
         body: body.value
       }
     }
-    axios.post(`/api/v1/users/${this.props.currentUser.id}/posts`, postInfo)
+    axios.post(`/api/v1/posts`, postInfo)
     .then((response) => {
-      this.props.addPost(response.data)
+      this.props.addPost(response.data.post)
       window.flash_messages.addMessage({ id: `newPost${response.data.id}`, text: 'Posted!', type: 'success' });
       body.value = ""
     })
