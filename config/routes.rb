@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     
       resources :users, only: [:index, :show] do
         resources :posts, only: [:show]
-        resources :friendships, only: [:index, :create, :update, :destroy]
+        resources :friendships, only: [:index, :create, :destroy]
       end
     
       resources :posts, only: [:index, :show, :create, :destroy, :update] do 
@@ -18,7 +18,7 @@ Rails.application.routes.draw do
       end
     
       resources :likes, only: [:show, :destroy]
-      resources :friendships, only: [:show]
+      resources :friendships, only: [:show, :update]
       resources :notifications, only: [:update]
     end
   end

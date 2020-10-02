@@ -12,7 +12,10 @@ class ApplicationController < ActionController::Base
           name: current_user.name,
           id: current_user.id,
           notifications: current_user.notifications,
-          signedIn: user_signed_in?
+          signedIn: user_signed_in?,
+          friends: {
+            requests: current_user.friend_requests
+          }
         }
       end
     end

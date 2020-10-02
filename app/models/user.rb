@@ -75,7 +75,10 @@ class User < ApplicationRecord
       id: self.id,
       name: self.name,
       posts: self.posts_data,
-      friends: self.friends
+      friends: {
+        active: self.active_friendships,
+        requests: self.friend_requests
+      }
     }
   end
 
