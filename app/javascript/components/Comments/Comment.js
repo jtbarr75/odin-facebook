@@ -1,5 +1,6 @@
 import React from "react"
 import axios from "axios"
+import Likes from "../Likes"
 
 class Comment extends React.Component {
   constructor(props) {
@@ -63,6 +64,7 @@ class Comment extends React.Component {
 
   render () {
     const { comment } = this.props
+
     return (
       <div className="card mt-3 bg-light">
         <div className="card-body">
@@ -84,7 +86,11 @@ class Comment extends React.Component {
             )}
           </div>
           
-          <p className="card-text" id={`commentBody${this.props.comment.id}`}>{comment.body}</p>
+          <p className="card-text" id={`commentBody${comment.id}`}>{comment.body}</p>
+          <small className="text-muted mr-1">{`${comment.likes.length} likes`}</small>
+         <small>
+          <Likes parent={comment} update={this.props.updateComments} currentUser={this.props.currentUser} className="card-link"/>
+        </small>
         </div>
       </div>
     )

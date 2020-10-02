@@ -12,6 +12,7 @@ class Comment < ApplicationRecord
 
   def data
     return {
+      type: "comment",
       id: self.id,
       body: self.body,
       created_at: created_at_pst,

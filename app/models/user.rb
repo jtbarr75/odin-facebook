@@ -72,6 +72,7 @@ class User < ApplicationRecord
 
   def data
     return {
+      type: "user",
       id: self.id,
       name: self.name,
       posts: self.posts_data,

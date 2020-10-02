@@ -20,6 +20,7 @@ class Post < ApplicationRecord
 
   def data
     return {
+      type: "post",
       id: self.id,
       body: self.body,
       picture: self.picture,

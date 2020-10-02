@@ -1,6 +1,7 @@
 import React from "react"
 import axios from 'axios'
 import Comments from '../Comments/Comments'
+import Likes from '../Likes'
 import PropTypes from 'prop-types'
 
 class Post extends React.Component {
@@ -209,7 +210,7 @@ class Post extends React.Component {
           </div>
           <hr/>
           <div className="d-flex justify-content-between">
-            {this.likeSection()}
+            <Likes parent={post} currentUser={this.props.currentUser} update={this.updatePost} className="btn btn-primary"/>
             <button className="btn btn-primary" onClick={this.toggleComments}>Comment</button>
           </div>
         </div>
