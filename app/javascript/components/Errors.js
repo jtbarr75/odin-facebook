@@ -8,27 +8,10 @@ class Errors extends React.Component {
   }
 
   render () {
-    const {obj} = this.props;
-    let errors = <></>;
-    if (obj.errors) {
+    const {errors} = this.props;
+    if (errors) {
       return (
-        <div className="row">
-          <div className="col-xs-8 col-xs-offset-2">
-          <div className="panel panel-danger">
-            <div className="panel-heading">
-            <h2 className="panel-title">
-              The following prohibited this form from submitting:
-            </h2>
-            <div className="panel-body">
-              <ul>
-              {obj.errors.full_messages.map(msg => {
-                <li>{msg}</li>
-              })}
-              </ul>
-            </div>
-            </div>
-          </div>
-          </div>
+        <div class="card-text">
         </div>
       )
     }

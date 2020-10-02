@@ -4,6 +4,16 @@ a:hover {
   cursor: pointer;
 }
 
+textarea {
+  resize: none;
+  border-radius: 3px;
+  border: 1px solid #212529;
+}
+
+button.btn-primary {
+  max-height: 56px;
+}
+
 // Notifications
 
 .notifications {
