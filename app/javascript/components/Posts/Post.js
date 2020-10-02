@@ -40,36 +40,6 @@ class Post extends React.Component {
     .catch((err) => {console.log(err)})
   }
 
-  handleLike(post) {
-    this.setToken();
-    const url = `/api/v1/posts/${post.id}/likes`
-    axios.post(url)
-    .then((response) => {
-      this.updatePost(response.data.likable)
-    })
-    .catch((err) => {console.log(err)})
-  }
-
-  handleUnlike(like) {
-    this.setToken();
-    const url = `/api/v1/likes/${like.id}`
-    axios.delete(url)
-    .then((response) => {
-      this.updatePost(response.data.likable)
-    })
-    .catch((err) => {console.log(err)})
-  }
-
-  likeSection() {
-    const { post } = this.state
-    let like = post.likes.find(like => like.user_id == this.props.currentUser.id)
-    if (like) {
-      return <button className="btn btn-primary" onClick={ ()=>this.handleUnlike(like)}>Unlike</button>
-    } else {
-      return <button className="btn btn-primary" onClick={ ()=>this.handleLike(post)}>Like</button>
-    }
-  }
-
   toggleComments() {
     if (this.state.commentsOpen) {
       this.setState({
