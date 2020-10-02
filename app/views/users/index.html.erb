@@ -1,5 +1,1 @@
-
-<h1>Users</h1>
-<div class="list-group">
-  <%= render @users %>
-</div>
+<%= react_component("Users/Users", {currentUser: @currentUser, users: @users}) %>

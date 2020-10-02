@@ -1,5 +1,5 @@
 import React, { Fragment } from "react"
-import Posts from './Posts/Posts'
+import Posts from '../Posts/Posts'
 import axios from 'axios'
 
 class User extends React.Component {

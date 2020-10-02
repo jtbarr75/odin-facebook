@@ -14,6 +14,7 @@ class ApplicationController < ActionController::Base
           notifications: current_user.notifications,
           signedIn: user_signed_in?,
           friends: {
+            active: current_user.active_friends,
             requests: current_user.friend_requests
           }
         }

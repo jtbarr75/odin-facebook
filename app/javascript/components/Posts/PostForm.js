@@ -40,7 +40,7 @@ class PostForm extends React.Component {
       body.value = ""
       errors.innerText = ""
     })
-    .catch((err) => {console.log(err)})
+    .catch((err) => {console.log(err.response)})
   }
 
   render() {

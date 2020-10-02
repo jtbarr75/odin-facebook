@@ -10,11 +10,14 @@ class Nav extends React.Component {
     this.handleLogout = this.handleLogout.bind(this)
   }
 
-  handleLogout(e) {
-    e.preventDefault()
+  setToken() {
     const token = document.querySelector('[name=csrf-token]').content
     axios.defaults.headers.common['X-CSRF-TOKEN'] = token
+  }
 
+  handleLogout(e) {
+    e.preventDefault()
+    this.setToken()
     axios.delete('/users/sign_out')
     .then(() => {
       window.location.href = "/login"
@@ -22,8 +25,7 @@ class Nav extends React.Component {
   }
 
   handleNotificationClick(event, notification) {
-    const token = document.querySelector('[name=csrf-token]').content
-    axios.defaults.headers.common['X-CSRF-TOKEN'] = token
+    this.setToken()
 
     event.preventDefault()
     axios.patch(`/api/v1/notifications/${notification.id}`)
@@ -91,10 +93,7 @@ class Nav extends React.Component {
               <a className="nav-link" href="/users">Users</a>
             </li>
           </ul>
-          <form className="form-inline mr-auto" action="/action_page.php">
-            <input className="form-control mr-sm-2" type="text" placeholder="Search"/>
-            <button className="btn btn-success" type="submit">Search</button>
-          </form>
+
           <ul className="navbar-nav ml-auto">
           <li className="nav-item dropdown">
               <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
