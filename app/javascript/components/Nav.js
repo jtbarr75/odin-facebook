@@ -28,7 +28,8 @@ class Nav extends React.Component {
     event.preventDefault()
     axios.patch(`/api/v1/notifications/${notification.id}`)
       .then((response) => {
-        window.location.href = `/posts/${response.data.parent.id}`
+        console.log(response)
+        window.location.href = `/${response.data.type}/${response.data.parent.id}`
         this.updateNotifications(response.data.notification)
       })
       .catch((err) => console.log(err))

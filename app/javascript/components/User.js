@@ -44,7 +44,6 @@ class User extends React.Component {
   render () {
     const { user } = this.state
     const { currentUser } = this.props
-    console.log(user)
     let edit;
     let friendOptions;
     if (currentUser.id == user.id) {
@@ -52,7 +51,6 @@ class User extends React.Component {
         <p><a href="#" className="btn btn-xs btn-primary">Edit Profile</a></p>
       )
     } else {
-      // friendOptions = <p>Not Friends yet</p>;
       if (user.friends.active.find( friendship => friendship.friend_id == currentUser.id)) {
         friendOptions = <p><span className="label label-success">Friends!</span></p>
       } else if (user.friends.requests.find( request => request.friend_id == currentUser.id)) {
