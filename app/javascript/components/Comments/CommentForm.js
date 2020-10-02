@@ -47,8 +47,8 @@ class CommentForm extends React.Component {
     return (
       <Fragment>
         <form >
-          <div className="form-group row justify-content-center align-items-center mb-1">
-            <textarea rows="2" id={`commentBody${this.props.post.id}`} className="col-8 mr-1" placeholder="Write a comment..."/>
+          <div className="form-group row justify-content-center mb-1">
+            <input id={`commentBody${this.props.post.id}`} className="col-8 mr-1" placeholder="Write a comment..."/>
             <button type="submit" onClick={this.handleSubmit} className="btn btn-primary col-2">Send</button>
           </div>
           <div className="form-group row justify-content-center mb-0">

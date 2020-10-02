@@ -205,13 +205,11 @@ class Post extends React.Component {
           <p className="card-text" id={`postBody${post.id}`}>{post.body}</p>
           { post.picture.url && <img className= "card-img" src={post.picture.url}/> }
           <div className="d-flex justify-content-between">
-            <p><small className="text-muted" >{post.likes.length} likes</small></p>
+            <span>
+              <small className="text-muted mr-1" >{post.likes.length} likes</small>
+              <small><Likes parent={post} currentUser={this.props.currentUser} update={this.updatePost} className="card-link"/></small>
+            </span>
             <a><small className="text-muted" onClick={this.toggleComments}>{post.comments.length} comments</small></a>
-          </div>
-          <hr/>
-          <div className="d-flex justify-content-between">
-            <Likes parent={post} currentUser={this.props.currentUser} update={this.updatePost} className="btn btn-primary"/>
-            <button className="btn btn-primary" onClick={this.toggleComments}>Comment</button>
           </div>
         </div>
         {this.commentSection()}
