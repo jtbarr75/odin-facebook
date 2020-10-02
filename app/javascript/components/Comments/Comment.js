@@ -62,6 +62,9 @@ class Comment extends React.Component {
     input.parentElement.removeChild(input)
   }
 
+  pluralize = (count, noun, suffix = 's') =>
+  `${count} ${noun}${count !== 1 ? suffix : ''}`;
+
   render () {
     const { comment } = this.props
 
@@ -87,7 +90,7 @@ class Comment extends React.Component {
           </div>
           
           <p className="card-text" id={`commentBody${comment.id}`}>{comment.body}</p>
-          <small className="text-muted mr-1">{`${comment.likes.length} likes`}</small>
+          <small className="text-muted mr-1">{this.pluralize(comment.likes.length, 'like', 's')}</small>
          <small>
           <Likes parent={comment} update={this.props.updateComments} currentUser={this.props.currentUser} className="card-link"/>
         </small>

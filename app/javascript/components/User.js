@@ -41,6 +41,9 @@ class User extends React.Component {
       .catch(err => console.log(err))
   }
 
+  pluralize = (count, noun, suffix = 's') =>
+  `${count} ${noun}${count !== 1 ? suffix : ''}`;
+
   render () {
     const { user } = this.state
     const { currentUser } = this.props
@@ -75,7 +78,7 @@ class User extends React.Component {
                 <img className="mr-3" src={user.picture && user.picture.url}/>
                 <div className="media-body">
                   <h2>{user.name}</h2>
-                  <p><a href="#">{user.friends.active.length} Friends</a></p>
+                  <p><a href="#">{this.pluralize(user.friends.active.length, 'friend', 's')}</a></p>
                   {edit}
                   {friendOptions}
                 </div>

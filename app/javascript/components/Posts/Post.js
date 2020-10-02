@@ -131,6 +131,9 @@ class Post extends React.Component {
     return this.inTimeline() ? this.props.post : this.state.post
   }
 
+  pluralize = (count, noun, suffix = 's') =>
+  `${count} ${noun}${count !== 1 ? suffix : ''}`;
+
   commentSection() {
     if (this.state.commentsOpen) {
       let post = this.post()
@@ -176,10 +179,10 @@ class Post extends React.Component {
           { post.picture.url && <img className= "card-img" src={post.picture.url}/> }
           <div className="d-flex justify-content-between">
             <span>
-              <small className="text-muted mr-1" >{post.likes.length} likes</small>
+              <small className="text-muted mr-1" >{this.pluralize(post.likes.length, 'like', 's')}</small>
               <small><Likes parent={post} currentUser={this.props.currentUser} update={this.updatePost} className="card-link"/></small>
             </span>
-            <a><small className="text-muted" onClick={this.toggleComments}>{post.comments.length} comments</small></a>
+            <a><small className="text-muted" onClick={this.toggleComments}>{this.pluralize(post.comments.length, 'comment', 's')}</small></a>
           </div>
         </div>
         {this.commentSection()}
