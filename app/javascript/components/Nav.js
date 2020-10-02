@@ -109,8 +109,8 @@ class Nav extends React.Component {
                 {currentUser.name}
               </a>
               <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                <a className="dropdown-item" href="#">Your Profile</a>
-                <a className="dropdown-item" href="#">Edit Profile</a>
+                <a className="dropdown-item" href={`/users/${currentUser.id}`}>Your Profile</a>
+                <a className="dropdown-item" href={`/users/${currentUser.id}/edit`}>Edit Profile</a>
                 <div className="dropdown-divider"></div>
                 <a className="dropdown-item" onClick={this.handleLogout}>Sign Out</a>
               </div>
