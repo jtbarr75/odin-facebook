@@ -22,13 +22,13 @@ Rails.application.routes.draw do
       resources :notifications, only: [:update]
     end
   end
-
-  resources :users, only: [:index, :show]
-  resources :posts, only: [:show]
+  
   root 'welcome#app'
   get '/login', to: 'welcome#login'
   get '/signup', to: 'welcome#signup'
   devise_for :users, controllers: { registrations: 'registrations', sessions: 'sessions' }
+  resources :users, only: [:index, :show]
+  resources :posts, only: [:show]  
   
   # get 'auth/:provider/callback', to: 'devise/sessions#create'
   # get 'auth/failure', to: redirect('/')

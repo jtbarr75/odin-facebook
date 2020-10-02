@@ -14,6 +14,8 @@ class User < ApplicationRecord
   has_many :likes
   has_many :notifications
 
+  attr_accessor :current_password
+
   #returns true if friendship is active with given user
   def friends_with(user)
     self.friends.exists?(user.id) && self.friendships.find_by(friend_id: user.id).status == 'active'

@@ -19,15 +19,8 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def update
-    @user = User.find_by_email(user_params[:email])
-
-    if @user.update_attributes(user_params)
-      render json: @user
-    else
-      warden.custom_failure!
-      render :json=> @user.errors, :status=>422
-    end
-end
+    super
+  end
 
   def destroy
     @user = User.find_by_email(user_params[:email])
@@ -41,6 +34,6 @@ end
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :current_password)
   end
 end
