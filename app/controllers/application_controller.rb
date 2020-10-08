@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
         @currentUser = {
           name: current_user.name,
           id: current_user.id,
-          notifications: current_user.notifications,
+          notifications: current_user.ordered_notifications,
           signedIn: user_signed_in?,
           friends: {
             active: current_user.active_friends,

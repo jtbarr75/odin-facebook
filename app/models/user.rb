@@ -85,6 +85,10 @@ class User < ApplicationRecord
     }
   end
 
+  def ordered_notifications
+    return self.notifications.order("created_at DESC")
+  end
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
