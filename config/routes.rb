@@ -4,8 +4,7 @@ Rails.application.routes.draw do
     namespace 'v1' do
     
       resources :users, only: [:index] do
-        resources :posts, only: [:show]
-        resources :friendships, only: [:index, :create, :destroy]
+        resources :friendships, only: [:index, :create]
       end
     
       resources :posts, only: [:index, :show, :create, :destroy, :update] do 
@@ -14,11 +13,11 @@ Rails.application.routes.draw do
       end
       
       resources :comments, only: [:destroy, :show, :update] do
-        resources :likes, only: [:create, :destroy]
+        resources :likes, only: [:create]
       end
     
       resources :likes, only: [:show, :destroy]
-      resources :friendships, only: [:show, :update]
+      resources :friendships, only: [:show, :update, :destroy]
       resources :notifications, only: [:update]
     end
   end
