@@ -17,7 +17,7 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
   test "layout links when logged in" do
     sign_in @user
     get root_path
-    assert_template 'users/index'
+    assert_template 'welcome/app'
     assert_select "a[href=?]", root_path
     assert_select "a[href=?]", edit_user_registration_path(@user)
     assert_select "a[href=?]", user_path(@user)

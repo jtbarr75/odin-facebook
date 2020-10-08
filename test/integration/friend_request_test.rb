@@ -13,8 +13,8 @@ class FriendRequestTest < ActionDispatch::IntegrationTest
     get user_path(@friend)
     assert_template 'users/show'
     #should have option to send friend request
-    assert_select "a[href=?]", user_friendships_path(@friend)
-    post user_friendships_path(@friend)
+    assert_select "button", "Send Friend Request"
+    post api_v1_user_friendships_path(@friend)
     @friendship = @friend.friendships.first
     assert_not @friendship.nil?
     #should show flash and 'request sent' label instead of send button
@@ -46,12 +46,12 @@ class FriendRequestTest < ActionDispatch::IntegrationTest
   test "unfriend someone" do
     #send request
     sign_in @user
-    post user_friendships_path(@friend)
+    post api_v1_user_friendships_path(@friend)
     sign_out @user
     #accept request
     sign_in @friend
     @friendship = @friend.friendships.first
-    patch user_friendship_path(@friend, @friendship), params: { id: @friendship.id, status: 'active' }
+    patch api_v1_friendship_path(@friendship), params: { id: @friendship.id, status: 'active' }
     assert @user.friends_count == 1
     assert @friend.friends_count == 1
     #should have link to unfriend
