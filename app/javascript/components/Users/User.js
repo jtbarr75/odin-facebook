@@ -78,7 +78,7 @@ class User extends React.Component {
                 <img className="mr-3" src={user.picture && user.picture.url}/>
                 <div className="media-body">
                   <h2>{user.name}</h2>
-                  <p><a href="#">{this.pluralize(user.friends.active.length, 'friend', 's')}</a></p>
+                  <p><a href={`/users/${user.id}/friends`}>{this.pluralize(user.friends.active.length, 'friend', 's')}</a></p>
                   {edit}
                   {friendOptions}
                 </div>

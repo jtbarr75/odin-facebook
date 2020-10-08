@@ -3,8 +3,6 @@ class FriendshipsController < ApplicationController
 
   def index
     @user = User.find(params[:user_id])
-    @friend_requests = @user.friend_requests.includes(:friend)
-    @friendships = @user.active_friendships.includes(:friend)
   end
 
   def create

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import axios from 'axios'
 
 class Users extends React.Component {
@@ -18,7 +18,8 @@ class Users extends React.Component {
     event.preventDefault()
     console.log("searching")
     const value = {
-      search: document.getElementById("search").value
+      search: document.getElementById("search").value,
+      inFriends: this.props.inFriends
     }
     axios.get("/api/v1/users", { params: value })
       .then(response => {
@@ -26,8 +27,13 @@ class Users extends React.Component {
         this.setState({
           users: response.data.users
         })
-        document.getElementById('searchResults').innerText = 
-          `Showing ${this.pluralize(this.state.users.length, 'result', 's')} for ${response.data.searched}`
+        results = document.getElementById('searchResults')
+        if (response.data.searched) {
+          results.innerText = 
+            `Showing ${this.pluralize(this.state.users.length, 'result', 's')} for ${response.data.searched}`
+        } else {
+          results.innerText = ""
+        }
       })
       .catch(err => console.log(err))
   }
@@ -43,26 +49,22 @@ class Users extends React.Component {
     })
 
     return (
-      <div className="row justify-content-center">
-        <div className="col-8">
-          <h2 className="mt-4 mb-4 text-center">Users</h2>
-          <div className="card w-100 mb-4">
-            <div className="card-body">
-              <form onSubmit={this.handleSearch}>
-                <div className="form-group row justify-content-center mb-1">
-                  <input id="search" className="col-8 mr-1" placeholder="Find Friends..."/>
-                  <button type="submit" className="btn btn-primary col-2">Search</button>
-                </div>
-              </form>
-            </div>
+      <Fragment>
+        <div className="card w-100 mb-4">
+          <div className="card-body">
+            <form onSubmit={this.handleSearch}>
+              <div className="form-group row justify-content-center mb-1">
+                <input id="search" className="col-8 mr-1" placeholder="Find Friends..."/>
+                <button type="submit" className="btn btn-primary col-2">Search</button>
+              </div>
+            </form>
+          </div>
         </div>
         <p id="searchResults" className="text-center"></p>
         <ul className="list-group">
           {usersList}
         </ul>
-      </div>
-    </div>
-      
+      </Fragment>
     )
   }
 }
