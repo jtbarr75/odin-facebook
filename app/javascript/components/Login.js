@@ -36,11 +36,11 @@ class Login extends React.Component {
               <form>
                 <div className="form-group">
                   <label>Email</label><br/>
-                  <input id="email" class="form-control" type="email" name="email" />
+                  <input id="email" className="form-control" type="email" name="email" />
                 </div>
                 <div className="form-group">
                   <label>Password</label><br/>
-                  <input id="password" class="form-control" type="password" name="password" />
+                  <input id="password" className="form-control" type="password" name="password" />
                 </div>
                 <div className="form-group">
                   <button className="btn btn-primary btn-large" onClick={this.handleLogin}>Log In</button>
