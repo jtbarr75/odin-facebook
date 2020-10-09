@@ -81,8 +81,8 @@ class Nav extends React.Component {
       return null;
     }
     return (
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <a className="navbar-brand" href="/">FriendPost</a>
+      <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a className="navbar-brand font-weight-bold" href="/">FriendPost</a>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
@@ -97,7 +97,7 @@ class Nav extends React.Component {
           <ul className="navbar-nav ml-auto">
           <li className="nav-item dropdown">
               <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Notifications <span className="badge badge-primary"> {this.unreadNotifications()} </span>
+                Notifications <span className="badge badge-light"> {this.unreadNotifications()} </span>
               </a>
               <div className="dropdown-menu dropdown-menu-right notifications" aria-labelledby="navbarDropdown">
                 {this.notificationSection()}
