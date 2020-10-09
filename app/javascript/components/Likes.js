@@ -39,9 +39,9 @@ class Likes extends React.Component {
     const { parent } = this.props
     let like = parent.likes.find(like => like.user_id == this.props.currentUser.id)
     if (like) {
-      return <a className={this.props.className} onClick={ ()=>this.handleUnlike(like)}>Unlike</a>
+      return <a className={this.props.className} onClick={ ()=>this.handleUnlike(like)}><span class="oi oi-thumb-down"></span></a>
     } else {
-      return <a className={this.props.className} onClick={ ()=>this.handleLike(parent)}>Like</a>
+      return <a className={this.props.className} onClick={ ()=>this.handleLike(parent)}><span class="oi oi-thumb-up"></span></a>
     }
   }
 
