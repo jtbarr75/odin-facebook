@@ -1,7 +1,7 @@
 <div>
   <div class="row justify-content-center">
-    <div class="col-8">
-        <%= react_component("Posts/Post", {post: @post, currentUser: current_user})%>
+    <div class="col">
+        <%= react_component("Posts/Post", {post: @post, currentUser: current_user, commentsOpen: true})%>
     </div>
   </div>
 </div>

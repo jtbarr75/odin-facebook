@@ -23,6 +23,12 @@ class Post extends React.Component {
     this.updateComments = this.updateComments.bind(this)
   }
 
+  componentDidMount() {
+    if (this.props.commentsOpen) {
+      this.getComments();
+    }
+  }
+
   setToken() {
     const token = document.querySelector('[name=csrf-token]').content
     axios.defaults.headers.common['X-CSRF-TOKEN'] = token
@@ -195,7 +201,12 @@ Post.propTypes = {
   removePost: PropTypes.func,
   updatePost: PropTypes.func,
   currentUser: PropTypes.object.isRequired,
-  post: PropTypes.object.isRequired
+  post: PropTypes.object.isRequired,
+  commentsOpen: PropTypes.bool
 };
+
+Post.defaultProps = {
+  commentsOpen: false
+}
 
 export default Post
