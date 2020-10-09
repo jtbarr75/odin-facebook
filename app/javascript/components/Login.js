@@ -29,7 +29,7 @@ class Login extends React.Component {
   render() {
     return (
       <div className="row justify-content-center">
-        <div className="col-5">
+        <div className="col">
           <div className="card mt-4 bg-light">
             <div className="card-body">
               <h2>Log In</h2>
