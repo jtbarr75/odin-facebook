@@ -1,5 +1,12 @@
 // General
 
+$container-max-widths: (
+        sm: 100%,
+        md: 720px,
+        lg: 800px,
+        xl: 800px
+) !default;
+
 a:hover {
   cursor: pointer;
 }

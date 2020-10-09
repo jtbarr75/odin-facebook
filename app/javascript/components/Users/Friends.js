@@ -22,7 +22,7 @@ class Friends extends React.Component {
 
     return (
       <div className="row justify-content-center">
-        <div className="col-8">
+        <div className="col">
           {currentUser.id == user.id && (
             <div className="card mt-4 mb-4">
               <div className="card-body">

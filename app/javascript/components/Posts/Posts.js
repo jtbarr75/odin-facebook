@@ -73,7 +73,7 @@ class Posts extends React.Component {
     
     return (
       <div className="row justify-content-center">
-        <div className="col-8">
+        <div className="col">
           {this.props.hasPostForm && <PostForm currentUser={this.props.currentUser} addPost = {this.addPost}/>}
           {this.postsList()} 
         </div>

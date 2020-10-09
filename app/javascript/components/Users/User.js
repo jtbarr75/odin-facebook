@@ -73,7 +73,7 @@ class User extends React.Component {
       <Fragment>
         <div className="container">
           <div className="row justify-content-center">
-            <div className="col-8 justify-content-center">
+            <div className="col justify-content-center">
               <div className="media align-items-center mt-3">
                 <img className="mr-3" src={user.picture && user.picture.url}/>
                 <div className="media-body">

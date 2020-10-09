@@ -1,0 +1,9 @@
+html {
+  font-size: 0.6rem;
+}
+
+@include media-breakpoint-up(sm) {
+  html {
+    font-size: 1.2rem;
+  }
+}
