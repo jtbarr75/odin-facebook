@@ -1,8 +1,8 @@
 <% content_for :title, "Edit Profile"%>
 
 <div class="row justify-content-center">
-  <div class="col-5">
-    <div class="card-mt-4 bg-light">
+  <div class="col">
+    <div class="card mt-4 bg-light">
       <div class="card-body">
         <h2>Edit Profile</h2>
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "form-horizontal", role: "form" }) do |f| %>
