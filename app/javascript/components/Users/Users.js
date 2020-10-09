@@ -50,12 +50,12 @@ class Users extends React.Component {
 
     return (
       <Fragment>
-        <div className="card w-100 mb-4">
+        <div className="card w-100  mt-4 mb-4">
           <div className="card-body">
             <form onSubmit={this.handleSearch}>
               <div className="form-group row justify-content-center mb-1">
-                <input id="search" className="col-8 mr-1" placeholder="Find Friends..."/>
-                <button type="submit" className="btn btn-primary col-2">Search</button>
+                <input id="search" className="col-7 col-lg-8 mr-1" placeholder="Find Friends..."/>
+                <button type="submit" className="btn btn-primary col-3 col-lg-2">Search</button>
               </div>
             </form>
           </div>

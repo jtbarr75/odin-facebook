@@ -15,6 +15,7 @@ textarea {
   resize: none;
   border-radius: 3px;
   border: 1px solid #212529;
+  width: 100%;
 }
 
 // Notifications
@@ -42,8 +43,7 @@ textarea {
 // Posts
 
 textarea#postEdit {
-  width: 100%;
-  resize: none;
+  
 }
 
 // Navbar
