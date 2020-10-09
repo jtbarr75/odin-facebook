@@ -48,8 +48,8 @@ class CommentForm extends React.Component {
       <Fragment>
         <form >
           <div className="form-group row justify-content-center mb-1">
-            <input id={`commentBody${this.props.post.id}`} className="col-8 mr-1" placeholder="Write a comment..."/>
-            <button type="submit" onClick={this.handleSubmit} className="btn btn-primary col-2">Send</button>
+            <input id={`commentBody${this.props.post.id}`} className="col-7 col-lg-8 mr-1" placeholder="Write a comment..."/>
+            <button type="submit" onClick={this.handleSubmit} className="btn btn-primary col-3 col-lg-2">Send</button>
           </div>
           <div className="form-group row justify-content-center mb-0">
             <small className="m-auto"><span id={`commentErrors${this.props.post.id}`} className="text-muted"></span></small>
