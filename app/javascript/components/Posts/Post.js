@@ -164,10 +164,10 @@ class Post extends React.Component {
             <h5 className="card-title"><a href={`/users/${post.user.id}`}>{post.user.name}</a></h5>
             {this.props.currentUser.id == post.user.id && (
               <div className="dropdown">
-              <button className="btn btn-secondary dropdown-toggle" type="button" id={`postDropDown${post.id}`} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Actions<span className="caret"></span>
-              </button>
-              <div className="dropdown-menu" aria-labelledby={`postDropDown${post.id}`}>
+              <span className="dropdown-toggle" id={`postDropDown${post.id}`} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="oi oi-ellipses icon-dropdown"></span>
+              </span>
+              <div className="dropdown-menu dropdown-menu-right" aria-labelledby={`postDropDown${post.id}`}>
                 <button className="dropdown-item" onClick={this.editPost}>Edit Post</button>
                 <button className="dropdown-item" onClick={this.handleDelete} data-id={post.id}>Delete Post</button>
               </div>

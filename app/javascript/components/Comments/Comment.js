@@ -78,10 +78,10 @@ class Comment extends React.Component {
             </h6>
             {this.props.currentUser.id == comment.user.id && (
               <div className="dropdown">
-              <button className="btn btn-secondary dropdown-toggle" type="button" id={`commentDropDown${comment.id}`} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Actions<span className="caret"></span>
-              </button>
-              <div className="dropdown-menu" aria-labelledby={`commentDropDown${comment.id}`}>
+              <span className="dropdown-toggle" id={`commentDropDown${comment.id}`} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="oi oi-ellipses icon-dropdown"></span>
+              </span>
+              <div className="dropdown-menu dropdown-menu-right" aria-labelledby={`commentDropDown${comment.id}`}>
                 <button className="dropdown-item" onClick={this.editComment}>Edit Comment</button>
                 <button className="dropdown-item" onClick={this.handleDelete} data-id={comment.id}>Delete Comment</button>
               </div>

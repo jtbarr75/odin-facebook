@@ -3,7 +3,7 @@
 $container-max-widths: (
         sm: 100%,
         md: 720px,
-        lg: 800px,
+        lg: 760px,
         xl: 800px
 ) !default;
 
@@ -40,10 +40,13 @@ textarea {
   z-index: 10;
 }
 
-// Posts
+// Icons
 
-textarea#postEdit {
-  
+.icon-dropdown {
+  color: #6c757d;
+  padding: 5px;
+  &:hover{
+    cursor: pointer;
+  }
 }
 
-// Navbar

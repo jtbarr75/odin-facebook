@@ -1,3 +1,9 @@
+@import '../../../../node_modules/bootstrap/scss/functions';
+@import '../../../../node_modules/bootstrap/scss/variables';
+@import '../../../../node_modules/bootstrap/scss/mixins/';
+
+
+
 html {
   font-size: 0.6rem;
 }
@@ -6,4 +12,8 @@ html {
   html {
     font-size: 1rem;
   }
+}
+
+.card .dropdown-toggle::after {
+  content: none;
 }
