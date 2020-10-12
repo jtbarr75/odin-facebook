@@ -30,11 +30,15 @@ class Nav extends React.Component {
     event.preventDefault()
     axios.patch(`/api/v1/notifications/${notification.id}`)
       .then((response) => {
-        console.log(response)
-        window.location.href = `/${response.data.type}/${response.data.parent.id}`
-        this.updateNotifications(response.data.notification)
+        if (response.ok) {
+          window.location.href = `/${response.data.type}/${response.data.parent.id}`
+          this.updateNotifications(response.data.notification)
+        }
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        window.flash_messages.addMessage({ id: "notification404", text: 'Notification no longer exists', type: 'danger' })
+        this.setState({currentUser: err.response.data.currentUser})
+      })
   }
 
   updateNotifications(notification) {
@@ -49,7 +53,7 @@ class Nav extends React.Component {
   }
 
   notificationSection() {
-    const { currentUser } = this.props
+    const { currentUser } = this.state
     let notifications;
     if (currentUser.notifications.length > 0) {
       notifications = currentUser.notifications.map((notification, index) => {
@@ -71,7 +75,7 @@ class Nav extends React.Component {
   }
 
   unreadNotifications(){
-    const notifications = [...this.props.currentUser.notifications]
+    const notifications = [...this.state.currentUser.notifications]
     return notifications.filter(n => n.unread == true).length
   }
 
