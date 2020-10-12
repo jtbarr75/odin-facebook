@@ -79,7 +79,7 @@ class Comment extends React.Component {
             {this.props.currentUser.id == comment.user.id && (
               <div className="dropdown">
               <span className="dropdown-toggle" id={`commentDropDown${comment.id}`} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="oi oi-ellipses icon-dropdown"></span>
+                <span className="oi oi-ellipses icon-dropdown"></span>
               </span>
               <div className="dropdown-menu dropdown-menu-right" aria-labelledby={`commentDropDown${comment.id}`}>
                 <button className="dropdown-item" onClick={this.editComment}>Edit Comment</button>

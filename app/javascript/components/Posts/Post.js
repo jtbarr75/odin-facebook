@@ -171,7 +171,7 @@ class Post extends React.Component {
             {this.props.currentUser.id == post.user.id && (
               <div className="dropdown">
               <span className="dropdown-toggle" id={`postDropDown${post.id}`} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="oi oi-ellipses icon-dropdown"></span>
+                <span className="oi oi-ellipses icon-dropdown"></span>
               </span>
               <div className="dropdown-menu dropdown-menu-right" aria-labelledby={`postDropDown${post.id}`}>
                 <button className="dropdown-item" onClick={this.editPost}>Edit Post</button>
