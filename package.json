@@ -5,7 +5,7 @@
     "@babel/core": "^7.11.6",
     "@babel/preset-react": "^7.10.4",
     "@rails/webpacker": "5.2.1",
-    "axios": "^0.20.0",
+    "axios": "^0.21.1",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "bootstrap": "^4.5.2",
     "css-loader": "^4.3.0",
